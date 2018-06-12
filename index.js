@@ -117,9 +117,6 @@ export async function openInbox (options = {}) {
     throw new EmailException('Option `app` should be undefined, null, or one of the following: "' + Object.keys(prefixes).join('", "') + '".')
   }
 
-  let lat = parseFloat(options.latitude)
-  let lng = parseFloat(options.longitude)
-  let query = options.query && options.query.length ? options.query : null
   let app = options.app && options.app.length ? options.app : null
 
   if (!app) {

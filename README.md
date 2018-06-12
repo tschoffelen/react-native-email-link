@@ -24,7 +24,7 @@ As of iOS 9, your app needs to provide the `LSApplicationQueriesSchemes` key ins
 Info.plist to specify the URL schemes with which the app can interact.
 
 Just put this in your Info.plist depending on which apps you'd like to support.
-Omitting these might mean that the library can't detect some of the maps apps installed by the user.
+Omitting these might mean that the library can't detect some of the mail apps installed by the user.
 
 ```
 <key>LSApplicationQueriesSchemes</key>

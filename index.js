@@ -34,7 +34,7 @@ const titles = {
 }
 
 /**
- * Check if a given map app is installed.
+ * Check if a given mail app is installed.
  *
  * @param {string} app
  * @returns {Promise<boolean>}
@@ -54,7 +54,7 @@ export function isAppInstalled (app) {
 }
 
 /**
- * Ask the user to choose one of the available map apps.
+ * Ask the user to choose one of the available mail apps.
  * @param title
  * @param message
  * @returns {Promise<String|null>}

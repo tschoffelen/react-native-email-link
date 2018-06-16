@@ -57,9 +57,14 @@ export function isAppInstalled (app) {
  * Ask the user to choose one of the available mail apps.
  * @param title
  * @param message
+ * @param cancelLabel
  * @returns {Promise<String|null>}
  */
-export function askAppChoice (title = 'Open mail app', message = 'Which app would you like to open?') {
+export function askAppChoice (
+  title = 'Open mail app',
+  message = 'Which app would you like to open?',
+  cancelLabel = 'Cancel',
+) {
   return new Promise(async (resolve) => {
     let availableApps = []
     for (let app in prefixes) {
@@ -74,7 +79,7 @@ export function askAppChoice (title = 'Open mail app', message = 'Which app woul
 
     if (isIOS) {
       let options = availableApps.map((app) => titles[app])
-      options.push('Cancel')
+      options.push(cancelLabel)
 
       ActionSheetIOS.showActionSheetWithOptions({
         title: title,
@@ -92,7 +97,7 @@ export function askAppChoice (title = 'Open mail app', message = 'Which app woul
     }
 
     let options = availableApps.map((app) => ({text: titles[app], onPress: () => resolve(app)}))
-    options.push({text: 'Cancel', onPress: () => resolve(null), style: 'cancel'})
+    options.push({text: cancelLabel, onPress: () => resolve(null), style: 'cancel'})
     Alert.alert(
       title,
       message,
@@ -106,7 +111,10 @@ export function askAppChoice (title = 'Open mail app', message = 'Which app woul
  * Open an email app, or let the user choose what app to open.
  *
  * @param {{
- *     app: string | undefined | null
+ *     app: string | undefined | null,
+ *     title: string,
+ *     message: string,
+ *     cancelLabel: string,
  * }} options
  */
 export async function openInbox (options = {}) {
@@ -117,10 +125,11 @@ export async function openInbox (options = {}) {
     throw new EmailException('Option `app` should be undefined, null, or one of the following: "' + Object.keys(prefixes).join('", "') + '".')
   }
 
-  let app = options.app && options.app.length ? options.app : null
+  let { app = null } = options;
 
   if (!app) {
-    app = await askAppChoice()
+    const { title, message, cancelLabel } = options;
+    app = await askAppChoice(title, message, cancelLabel)
   }
 
   let url = null

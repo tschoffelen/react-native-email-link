@@ -33,7 +33,7 @@ Omitting these might mean that the library can't detect some of the mail apps in
     <string>readdle-spark</string>
     <string>airmail</string>
     <string>ms-outlook</string>
-    <string>googlemail</string>
+    <string>googlegmail</string>
     <string>inbox-gmail</string>
 </array>
 ```

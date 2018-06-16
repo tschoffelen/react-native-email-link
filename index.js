@@ -46,8 +46,8 @@ export function isAppInstalled (app) {
     }
 
     Linking.canOpenURL(prefixes[app])
-      .then((result) => {
-        resolve(!!result)
+      .then((isSupported) => {
+        resolve(isSupported)
       })
       .catch(() => resolve(false))
   })

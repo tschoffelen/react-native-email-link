@@ -1,1 +1,9 @@
-node_modules
+.idea
+.gradle
+android/src/main/gen
+node_modules/
+npm-debug.log
+yarn-error.log
+build/
+android/build/
+.DS_Store

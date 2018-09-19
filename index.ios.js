@@ -4,7 +4,7 @@
  * This file supports both iOS and Android.
  */
 
-import { Platform, Alert, Linking } from "react-native";
+import { ActionSheetIOS, Alert, Linking } from "react-native";
 
 class EmailException {
   constructor(message) {

@@ -19,6 +19,14 @@ Currently supported apps:
 npm i -S react-native-email-link         # or yarn add react-native-email-link
 ```
 
+Afterwards do:
+
+```
+react-native link react-native-email-link
+```
+
+Linking is only necessary for Android, you might see an error on simulator, try it on real device.
+
 ### A note about iOS 9+
 As of iOS 9, your app needs to provide the `LSApplicationQueriesSchemes` key inside
 Info.plist to specify the URL schemes with which the app can interact.

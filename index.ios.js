@@ -59,8 +59,8 @@ export function isAppInstalled(app) {
  * @returns {Promise<String|null>}
  */
 export function askAppChoice(
-  title = "Open mail app",
-  message = "Which app would you like to open?",
+  title,
+  message,
   cancelLabel = "Cancel"
 ) {
   return new Promise(async resolve => {
@@ -78,12 +78,19 @@ export function askAppChoice(
     let options = availableApps.map(app => titles[app]);
     options.push(cancelLabel);
 
+    let text = {};
+    if (title || message) {
+      text = {
+        message,
+        title,
+      };
+    }
+
     ActionSheetIOS.showActionSheetWithOptions(
       {
-        title: title,
-        message: message,
-        options: options,
-        cancelButtonIndex: options.length - 1
+        options,
+        cancelButtonIndex: options.length - 1,
+        ...text
       },
       buttonIndex => {
         if (buttonIndex === options.length - 1) {

@@ -54,6 +54,45 @@ import { openInbox } from 'react-native-email-link'
 openInbox()
 ```
 
+## Arguments
+
+- [`title`](#title)
+- [`message`](#message)
+- [`cancelLabel`](#cancelLabel)
+- [`removeText`](#removeText)
+
+### `title`
+
+Text for the top of the ActionSheet or Intent.
+
+| Type     | Required | Default         |
+| -------- | -------- | --------------- |
+| string   | No       | 'Open mail app' |
+
+### `message`
+
+Subtext under the title on the ActionSheet
+
+| Type     | Required | Default                             | Platform |
+| -------- | -------- | ----------------------------------- | -------- |
+| string   | No       | 'Which app would you like to open?' | iOS      |
+
+### `cancelLabel`
+
+Text for last button of the ActionSheet.
+
+| Type     | Required | Default   | Platform |
+| -------- | -------- | --------- | -------- |
+| string   | No       | 'Cancel'  | iOS      |
+
+### `removeText`
+
+If true, not text will be show above the ActionSheet or Intent. Default value is false.
+
+| Type     | Required | Default  |
+| -------- | -------- | -------- |
+| boolean  | No       | false    |
+
 
 ## Authors
 

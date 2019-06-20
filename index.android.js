@@ -24,6 +24,11 @@ export async function openInbox(options = {}) {
     );
   }
 
-  NativeModules.Email.open(options.title || "What app would you like to open?");
+  let text = options.title || "What app would you like to open?";
+  if (options.removeText) {
+    text = '';
+  }
+
+  NativeModules.Email.open(text);
   return;
 }

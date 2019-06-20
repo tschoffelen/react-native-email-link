@@ -3,9 +3,11 @@ export function openInbox({
   title,
   message,
   cancelLabel,
+  removeText,
 }: {
   app?: string | null;
   title?: string;
   message?: string;
   cancelLabel?: string;
+  removeText?: boolean;
 }): void;

@@ -48,7 +48,10 @@ public class EmailModule extends ReactContextBaseJavaModule {
             ri = resInfo.get(i);
             String packageName = ri.activityInfo.packageName;
             Intent intent = pm.getLaunchIntentForPackage(packageName);
-            intentList.add(new LabeledIntent(intent, packageName, ri.loadLabel(pm), ri.icon));
+
+            if (intent != null) {
+                intentList.add(new LabeledIntent(intent, packageName, ri.loadLabel(pm), ri.icon));
+            }
         }
 
         LabeledIntent[] extraIntents = intentList.toArray(new LabeledIntent[intentList.size()]);

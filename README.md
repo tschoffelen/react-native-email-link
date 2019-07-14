@@ -19,13 +19,8 @@ Currently supported apps:
 npm i -S react-native-email-link         # or yarn add react-native-email-link
 ```
 
-Afterwards do:
-
-```
-react-native link react-native-email-link
-```
-
-Linking is only necessary for Android, you might see an error on simulator, try it on real device.
+This package works with autolinking on RN>=0.60. If you're using an earlier version of React Native,
+check out the legacy [rnpm](https://github.com/leanmotherfuckers/react-native-email-link/tree/rnpm) branch.
 
 ### A note about iOS 9+
 As of iOS 9, your app needs to provide the `LSApplicationQueriesSchemes` key inside
@@ -96,7 +91,9 @@ If true, not text will be show above the ActionSheet or Intent. Default value is
 
 ## Authors
 
-This library is developed by [Includable](https://includable.com/), a creative app and web platform
-development agency based in Amsterdam, The Netherlands.
+This library is developed by [Lean Motherfuckers](https://leanmotherfuckers.com/), a tech consulting
+company like no other.
+
+Contributors:
 
 * Thomas Schoffelen, [@tschoffelen](https://twitter.com/tschoffelen)

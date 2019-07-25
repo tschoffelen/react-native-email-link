@@ -16,10 +16,10 @@ Currently supported apps:
 ## Installation
 
 ```
-npm i -S react-native-email-link         # or yarn add react-native-email-link
+npm i -S react-native-email-link       # or yarn add react-native-email-link
 ```
 
-This package works with autolinking on RN>=0.60. If you're using an earlier version of React Native,
+This package works with autolinking on RN>=0.60. If you're using an earlier version of React Native, please install version `1.4.0` of the library, or
 check out the legacy [rnpm](https://github.com/leanmotherfuckers/react-native-email-link/tree/rnpm) branch.
 
 ### A note about iOS 9+

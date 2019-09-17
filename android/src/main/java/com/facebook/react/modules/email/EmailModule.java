@@ -39,26 +39,29 @@ public class EmailModule extends ReactContextBaseJavaModule {
         // First create an intent with only the package name of the first registered email app
         // and build a picked based on it
         Intent intentChooser = pm.getLaunchIntentForPackage(ri.activityInfo.packageName);
-        Intent openInChooser = Intent.createChooser(intentChooser, title);
 
-        // Then create a list of LabeledIntent for the rest of the registered email apps
-        List<LabeledIntent> intentList = new ArrayList<LabeledIntent>();
-        for (int i = 1; i < resInfo.size(); i++) {
-            // Extract the label and repackage it in a LabeledIntent
-            ri = resInfo.get(i);
-            String packageName = ri.activityInfo.packageName;
-            Intent intent = pm.getLaunchIntentForPackage(packageName);
+        if (intentChooser != null) {
+          Intent openInChooser = Intent.createChooser(intentChooser, title);
 
-            if (intent != null) {
+          // Then create a list of LabeledIntent for the rest of the registered email apps
+          List<LabeledIntent> intentList = new ArrayList<LabeledIntent>();
+          for (int i = 1; i < resInfo.size(); i++) {
+              // Extract the label and repackage it in a LabeledIntent
+              ri = resInfo.get(i);
+              String packageName = ri.activityInfo.packageName;
+              Intent intent = pm.getLaunchIntentForPackage(packageName);
+
+              if (intent != null) {
                 intentList.add(new LabeledIntent(intent, packageName, ri.loadLabel(pm), ri.icon));
-            }
-        }
+              }
+          }
 
-        LabeledIntent[] extraIntents = intentList.toArray(new LabeledIntent[intentList.size()]);
-        // Add the rest of the email apps to the picker selection
-        openInChooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, extraIntents);
-        openInChooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        getCurrentActivity().startActivity(openInChooser);
+          LabeledIntent[] extraIntents = intentList.toArray(new LabeledIntent[intentList.size()]);
+          // Add the rest of the email apps to the picker selection
+          openInChooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, extraIntents);
+          openInChooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+          getCurrentActivity().startActivity(openInChooser);
+        }
       }
   }
 }

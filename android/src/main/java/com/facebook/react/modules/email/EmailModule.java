@@ -29,7 +29,7 @@ public class EmailModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void open(final String title) {
+  public void open(final String title, final boolean newTask) {
     Intent emailIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:"));
     PackageManager pm = getCurrentActivity().getPackageManager();
 
@@ -59,7 +59,9 @@ public class EmailModule extends ReactContextBaseJavaModule {
           LabeledIntent[] extraIntents = intentList.toArray(new LabeledIntent[intentList.size()]);
           // Add the rest of the email apps to the picker selection
           openInChooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, extraIntents);
-          openInChooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+          if (newTask) {
+            openInChooser.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+          }
           getCurrentActivity().startActivity(openInChooser);
         }
       }

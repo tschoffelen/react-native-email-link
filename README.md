@@ -55,6 +55,7 @@ openInbox()
 - [`message`](#message)
 - [`cancelLabel`](#cancelLabel)
 - [`removeText`](#removeText)
+- [`newTask`](#newTask)
 
 ### `title`
 
@@ -88,6 +89,15 @@ If true, not text will be show above the ActionSheet or Intent. Default value is
 | -------- | -------- | -------- |
 | boolean  | No       | false    |
 
+### `newTask`
+
+If true, the email Intent will be started in a new Android task. Else, the Intent will be launched in the current task.
+
+Read more about Android tasks [here](https://developer.android.com/guide/components/activities/tasks-and-back-stack).
+
+| Type     | Required | Default   | Platform |
+| -------- | -------- | --------- | -------- |
+| boolean  | No       | true      | Android  |
 
 ## Authors
 

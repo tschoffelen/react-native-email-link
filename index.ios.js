@@ -38,15 +38,31 @@ const titles = {
 
 /**
  * Available params for each app url
- *  - airmail: https://help.airmailapp.com/en-us/article/airmail-ios-url-scheme-1q060gy/
+ *  - apple-mail: https://ios.gadgethacks.com/news/always-updated-list-ios-app-url-scheme-names-0184033/
  *  - gmail: https://stackoverflow.com/questions/32114455/open-gmail-app-from-my-app 
+ *  - spark: https://helpspot.readdle.com/spark/index.php?pg=kb.page&id=791
+ *  - airmail: https://help.airmailapp.com/en-us/article/airmail-ios-url-scheme-1q060gy/
+ *  - outlook: https://stackoverflow.com/questions/32369198/i-just-want-to-open-ms-outlook-app-and-see-mailto-screen-using-url-scheme-at-ios
+ * 
  */
 const uriParams = {
+  "apple-mail": {
+    cc: 'cc',
+    bcc: 'bcc',
+    subject: 'subject',
+    body: 'body'
+  },
   gmail: {
     path: 'co',
     to: 'to',
     cc: 'cc',
     bcc: 'bcc',
+    subject: 'subject',
+    body: 'body'
+  },
+  spark: {
+    path: 'compose',
+    to: 'recipient',
     subject: 'subject',
     body: 'body'
   },
@@ -57,7 +73,14 @@ const uriParams = {
     bcc: 'bcc',
     subject: 'subject',
     body: 'htmlBody',
-  }
+  },
+  outlook: {
+    path: 'compose',
+    to: 'to',
+    subject: 'subject',
+    body: 'body'
+  },
+
 }
 
 /**
@@ -80,7 +103,8 @@ function getUrlParams(app, options) {
     return params;
   }, [])
   
-  return `${appParms['path']}?${urlParams.join('&')}`
+  const path = app === 'apple-mail' ? options['to'] : appParms['path'];
+  return `${path}?${urlParams.join('&')}`
 }
 
 /**
@@ -197,6 +221,11 @@ export async function openInbox(options = {}) {
   let params = '';
   if(options.to || options.subject || options.body) {
     params = getUrlParams(app, options);
+
+    if (app === 'apple-mail') {
+      // apple mail base url to compose an email is mailto
+      url = 'mailto:';
+    }
   }
 
   if (url) {

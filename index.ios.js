@@ -36,12 +36,27 @@ const titles = {
   superhuman: "Superhuman"
 };
 
+/**
+ * Available params for each app url
+ *  - airmail: https://help.airmailapp.com/en-us/article/airmail-ios-url-scheme-1q060gy/
+ *  - gmail: https://stackoverflow.com/questions/32114455/open-gmail-app-from-my-app 
+ */
 const uriParams = {
   gmail: {
     path: 'co',
     to: 'to',
+    cc: 'cc',
+    bcc: 'bcc',
     subject: 'subject',
     body: 'body'
+  },
+  airmail: {
+    path: 'compose',
+    to: 'to',
+    cc: 'cc',
+    bcc: 'bcc',
+    subject: 'subject',
+    body: 'htmlBody',
   }
 }
 
@@ -58,7 +73,7 @@ function getUrlParams(app, options) {
   const appParms = uriParams[app];
   if (!appParms) { return "" };
 
-  const urlParams = ['to', 'subject', 'body'].reduce((params, currentParam) => {
+  const urlParams = Object.keys(appParms).reduce((params, currentParam) => {
     if (options[currentParam]) {
       params.push(`${appParms[currentParam]}=${options[currentParam]}`);
     }

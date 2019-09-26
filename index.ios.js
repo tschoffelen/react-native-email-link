@@ -37,13 +37,13 @@ const titles = {
 };
 
 /**
- * Available params for each app url
+ * Allowed params for each app url
  *  - apple-mail: https://ios.gadgethacks.com/news/always-updated-list-ios-app-url-scheme-names-0184033/
  *  - gmail: https://stackoverflow.com/questions/32114455/open-gmail-app-from-my-app 
+ *  - inbox: https://stackoverflow.com/questions/29655978/is-there-an-ios-mail-scheme-url-for-googles-inbox
  *  - spark: https://helpspot.readdle.com/spark/index.php?pg=kb.page&id=791
  *  - airmail: https://help.airmailapp.com/en-us/article/airmail-ios-url-scheme-1q060gy/
  *  - outlook: https://stackoverflow.com/questions/32369198/i-just-want-to-open-ms-outlook-app-and-see-mailto-screen-using-url-scheme-at-ios
- * 
  */
 const uriParams = {
   "apple-mail": {
@@ -53,6 +53,14 @@ const uriParams = {
     body: 'body'
   },
   gmail: {
+    path: 'co',
+    to: 'to',
+    cc: 'cc',
+    bcc: 'bcc',
+    subject: 'subject',
+    body: 'body'
+  },
+  inbox: {
     path: 'co',
     to: 'to',
     cc: 'cc',
@@ -103,7 +111,7 @@ function getUrlParams(app, options) {
     return params;
   }, [])
   
-  const path = app === 'apple-mail' ? options['to'] : appParms['path'];
+  const path = app === 'apple-mail' ? (options['to'] || '') : appParms['path'];
   return `${path}?${urlParams.join('&')}`
 }
 
@@ -219,7 +227,7 @@ export async function openInbox(options = {}) {
   }
 
   let params = '';
-  if(options.to || options.subject || options.body) {
+  if(options.to || options.subject || options.body || options.cc || options.bcc) {
     params = getUrlParams(app, options);
 
     if (app === 'apple-mail') {

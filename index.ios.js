@@ -4,7 +4,7 @@
  * This file supports both iOS and Android.
  */
 
-import { ActionSheetIOS, Alert, Linking } from "react-native";
+import { ActionSheetIOS, Linking } from "react-native";
 import { option } from "@oclif/parser/lib/flags";
 
 class EmailException {
@@ -96,23 +96,25 @@ const uriParams = {
  * @param {string} app 
  * @param {{
  *     to: string,
+ *     cc: string,
+ *     bcc: string,
  *     subject: string,
- *     body: string
+ *     body: string,
  * }} options 
  */
 function getUrlParams(app, options) {
   const appParms = uriParams[app];
   if (!appParms) { return "" };
 
+  const path = app === 'apple-mail' ? (options['to'] || '') : appParms['path'];
   const urlParams = Object.keys(appParms).reduce((params, currentParam) => {
     if (options[currentParam]) {
       params.push(`${appParms[currentParam]}=${options[currentParam]}`);
     }
     return params;
-  }, [])
-  
-  const path = app === 'apple-mail' ? (options['to'] || '') : appParms['path'];
-  return `${path}?${urlParams.join('&')}`
+  }, []);
+
+  return `${path}?${urlParams.join('&')}`;
 }
 
 /**
@@ -193,9 +195,15 @@ export function askAppChoice(
  *     message: string,
  *     cancelLabel: string,
  *     removeText: boolean,
+ *     to: string,
+ *     cc: string,
+ *     bcc: string,
+ *     subject: string,
+ *     body: string,
+ *     compose: boolean
  * }} options
  */
-export async function openInbox(options = {}) {
+export async function openInbox(options = { compose = false }) {
   if (!options || typeof options !== "object") {
     throw new EmailException(
       "First parameter of `openInbox` should contain object with options."
@@ -227,7 +235,7 @@ export async function openInbox(options = {}) {
   }
 
   let params = '';
-  if(options.to || options.subject || options.body || options.cc || options.bcc) {
+  if(option.compose || options.to || options.subject || options.body || options.cc || options.bcc) {
     params = getUrlParams(app, options);
 
     if (app === 'apple-mail') {

@@ -5,6 +5,7 @@
  */
 
 import { ActionSheetIOS, Alert, Linking } from "react-native";
+import { option } from "@oclif/parser/lib/flags";
 
 class EmailException {
   constructor(message) {
@@ -34,6 +35,38 @@ const titles = {
   yahoo: "Yahoo Mail",
   superhuman: "Superhuman"
 };
+
+const uriParams = {
+  gmail: {
+    path: 'co',
+    to: 'to',
+    subject: 'subject',
+    body: 'body'
+  }
+}
+
+/**
+ * Returns param to open app compose screen and pre-fill 'to', 'subject' and 'body',
+ * @param {string} app 
+ * @param {{
+ *     to: string,
+ *     subject: string,
+ *     body: string
+ * }} options 
+ */
+function getUrlParams(app, options) {
+  const appParms = uriParams[app];
+  if (!appParms) { return "" };
+
+  const urlParams = ['to', 'subject', 'body'].reduce((params, currentParam) => {
+    if (options[currentParam]) {
+      params.push(`${appParms[currentParam]}=${options[currentParam]}`);
+    }
+    return params;
+  }, [])
+  
+  return `${appParms['path']}?${urlParams.join('&')}`
+}
 
 /**
  * Check if a given mail app is installed.
@@ -77,7 +110,9 @@ export function askAppChoice(
         availableApps.push(app);
       }
     }
+    console.log('availableApps: ', availableApps);
     if (availableApps.length < 2) {
+      console.log()
       return resolve(availableApps[0] || null);
     }
 
@@ -144,7 +179,12 @@ export async function openInbox(options = {}) {
       url = prefixes[app];
   }
 
+  let params = '';
+  if(options.to || options.subject || options.body) {
+    params = getUrlParams(app, options);
+  }
+
   if (url) {
-    return Linking.openURL(url);
+    return Linking.openURL(`${url}${params}`);
   }
 }

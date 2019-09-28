@@ -93,7 +93,7 @@ const uriParams = {
 
 /**
  * Returns param to open app compose screen and pre-fill 'to', 'subject' and 'body',
- * @param {string} app 
+ * @param {string} app
  * @param {{
  *     to: string,
  *     cc: string,
@@ -104,7 +104,7 @@ const uriParams = {
  */
 function getUrlParams(app, options) {
   const appParms = uriParams[app];
-  if (!appParms) { return "" };
+  if (!appParms) { return '' };
 
   const path = app === 'apple-mail' ? (options['to'] || '') : appParms['path'];
   const urlParams = Object.keys(appParms).reduce((params, currentParam) => {
@@ -159,9 +159,8 @@ export function askAppChoice(
         availableApps.push(app);
       }
     }
-    console.log('availableApps: ', availableApps);
+
     if (availableApps.length < 2) {
-      console.log()
       return resolve(availableApps[0] || null);
     }
 
@@ -187,28 +186,12 @@ export function askAppChoice(
 }
 
 /**
- * Open an email app, or let the user choose what app to open.
- *
- * @param {{
+ * Returns the name of the app provided in the options object of the app selected by the user.
+ * @param {
  *     app: string | undefined | null,
- *     title: string,
- *     message: string,
- *     cancelLabel: string,
- *     removeText: boolean,
- *     to: string,
- *     cc: string,
- *     bcc: string,
- *     subject: string,
- *     body: string,
- *     compose: boolean
- * }} options
+ * } options 
  */
-export async function openInbox(options = { compose = false }) {
-  if (!options || typeof options !== "object") {
-    throw new EmailException(
-      "First parameter of `openInbox` should contain object with options."
-    );
-  }
+async function getApp(options) {
   if (
     "app" in options &&
     options.app &&
@@ -228,23 +211,67 @@ export async function openInbox(options = { compose = false }) {
     app = await askAppChoice(title, message, cancelLabel, removeText);
   }
 
-  let url = null;
-  switch (app) {
-    default:
-      url = prefixes[app];
+  if (!app) {
+    throw new EmailException('No email app found');
   }
 
-  let params = '';
-  if(option.compose || options.to || options.subject || options.body || options.cc || options.bcc) {
-    params = getUrlParams(app, options);
+  return app;
+}
 
-    if (app === 'apple-mail') {
-      // apple mail base url to compose an email is mailto
-      url = 'mailto:';
-    }
+/**
+ * Open an email app, or let the user choose what app to open.
+ *
+ * @param {{
+  *     app: string | undefined | null,
+  *     title: string,
+  *     message: string,
+  *     cancelLabel: string,
+  *     removeText: boolean
+  * }} options
+  */
+export async function openInbox(options) {
+  if (!options || typeof options !== "object") {
+    throw new EmailException(
+      "First parameter of `openInbox` should contain object with options."
+    );
   }
 
-  if (url) {
-    return Linking.openURL(`${url}${params}`);
+  const app = await getApp(options);
+  return Linking.openURL(prefixes[app]);
+}
+
+/**
+ * Open an email app on the compose screen, or let the user choose what app to open on the compose screen.
+ *
+ * @param {{
+  *     app: string | undefined | null,
+  *     title: string,
+  *     message: string,
+  *     cancelLabel: string,
+  *     removeText: boolean,
+  *     to: string,
+  *     cc: string,
+  *     bcc: string,
+  *     subject: string,
+  *     body: string,
+  *     compose: boolean
+  * }} options
+  */
+export async function openComposer(options) {
+  if (!options || typeof options !== "object") {
+    throw new EmailException(
+      "First parameter of `openComposer` should contain object with options."
+    );
   }
+
+  const app = await getApp(options);
+  const params = getUrlParams(app, options);
+  let prefix = prefixes[app];
+
+  if (app === 'apple-mail') {
+    // apple mail prefix to compose an email is mailto
+    prefix = 'mailto:';
+  }
+
+  return Linking.openURL(`${prefix}${params}`);
 }

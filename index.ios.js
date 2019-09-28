@@ -71,6 +71,8 @@ const uriParams = {
   spark: {
     path: 'compose',
     to: 'recipient',
+    cc: 'cc',
+    bcc: 'bcc',
     subject: 'subject',
     body: 'body'
   },
@@ -85,6 +87,8 @@ const uriParams = {
   outlook: {
     path: 'compose',
     to: 'to',
+    cc: 'cc',
+    bcc: 'bcc',
     subject: 'subject',
     body: 'body'
   },
@@ -187,9 +191,9 @@ export function askAppChoice(
 
 /**
  * Returns the name of the app provided in the options object of the app selected by the user.
- * @param {
+ * @param {{
  *     app: string | undefined | null,
- * } options 
+ * }} options 
  */
 async function getApp(options) {
   if (

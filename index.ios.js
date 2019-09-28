@@ -257,8 +257,7 @@ export async function openInbox(options) {
   *     cc: string,
   *     bcc: string,
   *     subject: string,
-  *     body: string,
-  *     compose: boolean
+  *     body: string
   * }} options
   */
 export async function openComposer(options) {

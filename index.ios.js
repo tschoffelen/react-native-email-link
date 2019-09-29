@@ -196,6 +196,12 @@ export function askAppChoice(
  * }} options 
  */
 async function getApp(options) {
+  if (options && typeof options !== "object") {
+    throw new EmailException(
+      "First parameter must be an object of options."
+    );
+  }
+
   if (
     "app" in options &&
     options.app &&
@@ -234,12 +240,6 @@ async function getApp(options) {
   * }} options
   */
 export async function openInbox(options) {
-  if (!options || typeof options !== "object") {
-    throw new EmailException(
-      "First parameter of `openInbox` should contain object with options."
-    );
-  }
-
   const app = await getApp(options);
   return Linking.openURL(prefixes[app]);
 }
@@ -261,12 +261,6 @@ export async function openInbox(options) {
   * }} options
   */
 export async function openComposer(options) {
-  if (!options || typeof options !== "object") {
-    throw new EmailException(
-      "First parameter of `openComposer` should contain object with options."
-    );
-  }
-
   const app = await getApp(options);
   const params = getUrlParams(app, options);
   let prefix = prefixes[app];

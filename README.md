@@ -11,6 +11,7 @@ Currently supported apps:
 * Spark
 * Airmail
 * Outlook
+* Yahoo Mail
 
 
 ## Installation
@@ -38,6 +39,7 @@ Omitting these might mean that the library can't detect some of the mail apps in
     <string>ms-outlook</string>
     <string>googlegmail</string>
     <string>inbox-gmail</string>
+    <string>ymail</string>
 </array>
 ```
 

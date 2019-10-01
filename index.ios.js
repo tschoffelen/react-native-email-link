@@ -20,7 +20,8 @@ const prefixes = {
   spark: "readdle-spark://",
   airmail: "airmail://",
   outlook: "ms-outlook://",
-  yahoo: 'ymail://'
+  yahoo: "ymail://",
+  superhuman: "superhuman://"
 };
 
 const titles = {
@@ -30,7 +31,8 @@ const titles = {
   spark: "Spark",
   airmail: "Airmail",
   outlook: "Outlook",
-  yahoo: "Yahoo Mail"
+  yahoo: "Yahoo Mail",
+  superhuman: "Superhuman"
 };
 
 /**

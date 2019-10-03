@@ -96,6 +96,8 @@ If true, not text will be show above the ActionSheet or Intent. Default value is
 
 ### openComposer
 
+**Note**: `openComposer()` is only available for iOS. If used with an android device, it will behave exaclty like `openInbox()`. (PRs are welcomed to add Android support)
+
 ```javascript
 import { openComposer } from 'react-native-email-link'
 

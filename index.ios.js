@@ -4,36 +4,31 @@
  * This file supports both iOS and Android.
  */
 
-import { ActionSheetIOS, Linking } from "react-native";
-import { option } from "@oclif/parser/lib/flags";
+import { ActionSheetIOS, Linking } from 'react-native';
 
 class EmailException {
   constructor(message) {
     this.message = message;
-    this.name = "EmailException";
+    this.name = 'EmailException';
   }
 }
 
 const prefixes = {
-  "apple-mail": "message://",
-  gmail: "googlegmail://",
-  inbox: "inbox-gmail://",
-  spark: "readdle-spark://",
-  airmail: "airmail://",
-  outlook: "ms-outlook://",
-  yahoo: "ymail://",
-  superhuman: "superhuman://"
+  'apple-mail': 'message://',
+  gmail: 'googlegmail://',
+  inbox: 'inbox-gmail://',
+  spark: 'readdle-spark://',
+  airmail: 'airmail://',
+  outlook: 'ms-outlook://'
 };
 
 const titles = {
-  "apple-mail": "Mail",
-  gmail: "Gmail",
-  inbox: "Inbox",
-  spark: "Spark",
-  airmail: "Airmail",
-  outlook: "Outlook",
-  yahoo: "Yahoo Mail",
-  superhuman: "Superhuman"
+  'apple-mail': 'Mail',
+  gmail: 'Gmail',
+  inbox: 'Inbox',
+  spark: 'Spark',
+  airmail: 'Airmail',
+  outlook: 'Outlook'
 };
 
 /**
@@ -46,7 +41,7 @@ const titles = {
  *  - outlook: https://stackoverflow.com/questions/32369198/i-just-want-to-open-ms-outlook-app-and-see-mailto-screen-using-url-scheme-at-ios
  */
 const uriParams = {
-  "apple-mail": {
+  'apple-mail': {
     cc: 'cc',
     bcc: 'bcc',
     subject: 'subject',
@@ -150,9 +145,9 @@ export function isAppInstalled(app) {
  * @returns {Promise<String|null>}
  */
 export function askAppChoice(
-  title = "Open mail app",
-  message = "Which app would you like to open?",
-  cancelLabel = "Cancel",
+  title = 'Open mail app',
+  message = 'Which app would you like to open?',
+  cancelLabel = 'Cancel',
   removeText = false
 ) {
   return new Promise(async resolve => {
@@ -196,14 +191,14 @@ export function askAppChoice(
  * }} options 
  */
 async function getApp(options) {
-  if (options && typeof options !== "object") {
+  if (options && typeof options !== 'object') {
     throw new EmailException(
-      "First parameter must be an object of options."
+      'First parameter must be an object of options.'
     );
   }
 
   if (
-    "app" in options &&
+    'app' in options &&
     options.app &&
     Object.keys(prefixes).indexOf(options.app) < 0
   ) {

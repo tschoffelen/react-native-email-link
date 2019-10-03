@@ -12,7 +12,7 @@ export function openInbox({
   removeText?: boolean;
 }): void;
 
-export function openCompose({
+export function openComposer({
   app,
   title,
   message,

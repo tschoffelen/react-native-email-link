@@ -35,3 +35,8 @@ export function openComposer({
   subject?: string;
   body?: string;
 }): void;
+
+export class EmailException {
+  message: string;
+  name: string;
+}

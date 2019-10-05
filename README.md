@@ -47,13 +47,15 @@ Omitting these might mean that the library can't detect some of the mail apps in
 
 ## Usage
 
-```
+### openInbox
+
+```javascript
 import { openInbox } from 'react-native-email-link'
 
 openInbox()
 ```
 
-## Arguments
+#### Arguments
 
 - [`title`](#title)
 - [`message`](#message)
@@ -61,7 +63,7 @@ openInbox()
 - [`removeText`](#removeText)
 - [`newTask`](#newTask)
 
-### `title`
+#### `title`
 
 Text for the top of the ActionSheet or Intent.
 
@@ -69,7 +71,7 @@ Text for the top of the ActionSheet or Intent.
 | -------- | -------- | --------------- |
 | string   | No       | 'Open mail app' |
 
-### `message`
+#### `message`
 
 Subtext under the title on the ActionSheet
 
@@ -77,7 +79,7 @@ Subtext under the title on the ActionSheet
 | -------- | -------- | ----------------------------------- | -------- |
 | string   | No       | 'Which app would you like to open?' | iOS      |
 
-### `cancelLabel`
+#### `cancelLabel`
 
 Text for last button of the ActionSheet.
 
@@ -85,7 +87,7 @@ Text for last button of the ActionSheet.
 | -------- | -------- | --------- | -------- |
 | string   | No       | 'Cancel'  | iOS      |
 
-### `removeText`
+#### `removeText`
 
 If true, not text will be show above the ActionSheet or Intent. Default value is false.
 
@@ -93,7 +95,7 @@ If true, not text will be show above the ActionSheet or Intent. Default value is
 | -------- | -------- | -------- |
 | boolean  | No       | false    |
 
-### `newTask`
+#### `newTask`
 
 If true, the email Intent will be started in a new Android task. Else, the Intent will be launched in the current task.
 
@@ -104,6 +106,100 @@ Read more about Android tasks [here](https://developer.android.com/guide/compone
 | boolean  | No       | true      | Android  |
 
 
+### openComposer
+
+**Note**: `openComposer()` is only available for iOS. If used with an android device, it will behave exaclty like `openInbox()`. (PRs are welcomed to add Android support)
+
+```javascript
+import { openComposer } from 'react-native-email-link'
+
+openComposer()
+```
+
+#### Arguments
+
+- [`title`](#title)
+- [`message`](#message)
+- [`cancelLabel`](#cancelLabel)
+- [`removeText`](#removeText)
+- [`to`](#to)
+- [`cc`](#cc)
+- [`bcc`](#bcc)
+- [`subject`](#subject)
+- [`body`](#body)
+
+#### `title`
+
+Text for the top of the ActionSheet or Intent.
+
+| Type     | Required | Default         |
+| -------- | -------- | --------------- |
+| string   | No       | 'Open mail app' |
+
+#### `message`
+
+Subtext under the title on the ActionSheet.
+
+| Type     | Required | Default                             | Platform |
+| -------- | -------- | ----------------------------------- | -------- |
+| string   | No       | 'Which app would you like to open?' | iOS      |
+
+#### `cancelLabel`
+
+Text for last button of the ActionSheet.
+
+| Type     | Required | Default   | Platform |
+| -------- | -------- | --------- | -------- |
+| string   | No       | 'Cancel'  | iOS      |
+
+#### `removeText`
+
+If true, not text will be show above the ActionSheet or Intent. Default value is false.
+
+| Type     | Required | Default  |
+| -------- | -------- | -------- |
+| boolean  | No       | false    |
+
+#### `to`
+
+Recipient's email address.
+
+| Type     | Required | Default  |
+| -------- | -------- | -------- |
+| string   | No       | null     |
+
+#### `cc`
+
+Email's cc.
+
+| Type     | Required | Default  |
+| -------- | -------- | -------- |
+| string   | No       | null     |
+
+#### `bcc`
+
+Email's bcc.
+
+| Type     | Required | Default  |
+| -------- | -------- | -------- |
+| string   | No       | null     |
+
+#### `subject`
+
+Email's subject.
+
+| Type     | Required | Default  |
+| -------- | -------- | -------- |
+| string   | No       | null     |
+
+#### `body`
+
+Email's body.
+
+| Type     | Required | Default  |
+| -------- | -------- | -------- |
+| string   | No       | null     |
+
 ## Authors
 
 This library is developed by [Lean Motherfuckers](https://leanmotherfuckers.com/), a tech consulting
@@ -112,3 +208,4 @@ company like no other.
 Contributors:
 
 * Thomas Schoffelen, [@tschoffelen](https://twitter.com/tschoffelen)
+* César Jeanroy, [@cesar3030](https://github.com/cesar3030)

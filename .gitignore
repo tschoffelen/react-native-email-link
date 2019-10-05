@@ -7,3 +7,5 @@ yarn-error.log
 build/
 android/build/
 .DS_Store
+*.iml
+local.properties

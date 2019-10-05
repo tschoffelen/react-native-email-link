@@ -1,36 +1,46 @@
 import groovy.json.JsonSlurper
 
-def computeVersionName() {
-    // dynamically retrieve version from package.json
+def readPackageJson() {
     def slurper = new JsonSlurper()
-    def json = slurper.parse(file('../package.json'), "utf-8")
-    return json.version
+    return slurper.parse(file('../package.json'), "utf-8")
 }
 
-def DEFAULT_COMPILE_SDK_VERSION             = 25
-def DEFAULT_BUILD_TOOLS_VERSION             = "25.0.3"
-def DEFAULT_TARGET_SDK_VERSION              = 25
+def computeVersionName() {
+    return readPackageJson().version
+}
+
+def computeVersionCode() {
+    return readPackageJson().versionCode
+}
 
 buildscript {
+    ext {
+        minSdkVersion = 16
+        compileSdkVersion = 29
+        targetSdkVersion = 29
+        gradlePluginVersion = "3.5.1"
+        reactNativeVersion = "+" // The react native versioning on jcenter is messed up: https://github.com/facebook/react-native/issues/13094
+    }
+
     repositories {
         jcenter()
+        google()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.+'
+        classpath "com.android.tools.build:gradle:${gradlePluginVersion}"
     }
 }
 
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.hasProperty('compileSdkVersion') ? rootProject.compileSdkVersion : DEFAULT_COMPILE_SDK_VERSION
-    buildToolsVersion rootProject.hasProperty('buildToolsVersion') ? rootProject.buildToolsVersion : DEFAULT_BUILD_TOOLS_VERSION
+    compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion rootProject.hasProperty('targetSdkVersion') ? rootProject.targetSdkVersion : DEFAULT_TARGET_SDK_VERSION
-        versionCode 1
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode computeVersionCode()
         versionName computeVersionName()
     }
 
@@ -45,8 +55,10 @@ repositories {
     maven {
         url "$projectDir/../../react-native/android"
     }
+    jcenter()
+    google()
 }
 
 dependencies {
-    implementation "com.facebook.react:react-native:+"
+    implementation "com.facebook.react:react-native:${rootProject.ext.reactNativeVersion}"
 }

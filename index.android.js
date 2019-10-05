@@ -29,6 +29,11 @@ export async function openInbox(options = {}) {
     text = '';
   }
 
-  NativeModules.Email.open(text);
+  let newTask = true;
+  if ("newTask" in options) {
+    newTask = Boolean(options.newTask);
+  }
+
+  NativeModules.Email.open(text, newTask);
   return;
 }

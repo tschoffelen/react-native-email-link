@@ -234,7 +234,7 @@ async function getApp(options) {
   *     removeText: boolean
   * }} options
   */
-export async function openInbox(options) {
+export async function openInbox(options = {}) {
   const app = await getApp(options);
   return Linking.openURL(prefixes[app]);
 }

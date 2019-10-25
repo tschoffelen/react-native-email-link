@@ -6,7 +6,7 @@
 
 import { ActionSheetIOS, Linking } from 'react-native';
 
-class EmailException {
+export class EmailException {
   constructor(message) {
     this.message = message;
     this.name = 'EmailException';

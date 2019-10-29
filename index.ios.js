@@ -5,13 +5,8 @@
  */
 
 import { ActionSheetIOS, Linking } from 'react-native';
-
-export class EmailException {
-  constructor(message) {
-    this.message = message;
-    this.name = 'EmailException';
-  }
-}
+import { EmailException } from './src/email-exception';
+export { EmailException };
 
 const prefixes = {
   'apple-mail': 'message://',

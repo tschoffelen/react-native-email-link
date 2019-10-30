@@ -1,6 +1,6 @@
 {
   "name": "react-native-email-link",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "versionCode": 2,
   "description": "Open the mail app of the user's choice",
   "main": "index",

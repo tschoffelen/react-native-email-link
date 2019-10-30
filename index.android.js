@@ -5,6 +5,8 @@
  */
 
 import { NativeModules } from "react-native";
+import { EmailException } from './src/email-exception';
+export { EmailException };
 
 /**
  * Open an email app, or let the user choose what app to open.
@@ -36,4 +38,8 @@ export async function openInbox(options = {}) {
 
   NativeModules.Email.open(text, newTask);
   return;
+}
+
+export async function openComposer(options) {
+  throw new EmailException('openComposer not available on Anroid');
 }

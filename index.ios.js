@@ -14,7 +14,9 @@ const prefixes = {
   inbox: 'inbox-gmail://',
   spark: 'readdle-spark://',
   airmail: 'airmail://',
-  outlook: 'ms-outlook://'
+  outlook: 'ms-outlook://',
+  yahoo: 'ymail://',
+  superhuman: 'superhuman://'
 };
 
 const titles = {
@@ -23,7 +25,9 @@ const titles = {
   inbox: 'Inbox',
   spark: 'Spark',
   airmail: 'Airmail',
-  outlook: 'Outlook'
+  outlook: 'Outlook',
+  yahoo: 'Yahoo Mail',
+  superhuman: 'Superhuman'
 };
 
 /**

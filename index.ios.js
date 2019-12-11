@@ -9,25 +9,25 @@ import { EmailException } from './src/email-exception';
 export { EmailException };
 
 const prefixes = {
-  "apple-mail": "message://",
-  gmail: "googlegmail://",
-  inbox: "inbox-gmail://",
-  spark: "readdle-spark://",
-  airmail: "airmail://",
-  outlook: "ms-outlook://",
-  yahoo: "ymail://",
-  superhuman: "superhuman://"
+  'apple-mail': 'message://',
+  gmail: 'googlegmail://',
+  inbox: 'inbox-gmail://',
+  spark: 'readdle-spark://',
+  airmail: 'airmail://',
+  outlook: 'ms-outlook://',
+  yahoo: 'ymail://',
+  superhuman: 'superhuman://'
 };
 
 const titles = {
-  "apple-mail": "Mail",
-  gmail: "Gmail",
-  inbox: "Inbox",
-  spark: "Spark",
-  airmail: "Airmail",
-  outlook: "Outlook",
-  yahoo: "Yahoo Mail",
-  superhuman: "Superhuman"
+  'apple-mail': 'Mail',
+  gmail: 'Gmail',
+  inbox: 'Inbox',
+  spark: 'Spark',
+  airmail: 'Airmail',
+  outlook: 'Outlook',
+  yahoo: 'Yahoo Mail',
+  superhuman: 'Superhuman'
 };
 
 /**

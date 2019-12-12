@@ -86,7 +86,14 @@ const uriParams = {
     subject: 'subject',
     body: 'body'
   },
-
+  yahoo: {
+    path: 'mail/compose',
+    to: 'to',
+    cc: 'cc',
+    bcc: 'bcc',
+    subject: 'subject',
+    body: 'body'
+  }
 }
 
 /**

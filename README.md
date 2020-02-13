@@ -52,10 +52,7 @@ Omitting these might mean that the library can't detect some of the mail apps in
 ```javascript
 import { openInbox } from 'react-native-email-link'
 
-openInbox({
-	message: 'Whatcha wanna do?',
-	cancelLabel: 'Go back!'
-})
+openInbox()
 ```
 
 #### Arguments
@@ -108,6 +105,17 @@ Read more about Android tasks [here](https://developer.android.com/guide/compone
 | -------- | -------- | --------- | -------- |
 | boolean  | No       | true      | Android  |
 
+
+#### Example
+
+```javascript
+import { openInbox } from 'react-native-email-link'
+
+openInbox({
+	message: 'Whatcha wanna do?',
+	cancelLabel: 'Go back!'
+})
+```
 
 ### openComposer
 

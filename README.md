@@ -216,7 +216,7 @@ Email's body.
 ```javascript
 import { openComposer } from 'react-native-email-link'
 
-openInbox({
+openComposer({
 	to: 'yourEmail@address.com',
 	subject: 'Wanna change the world?',
 	body: 'This is our year!',

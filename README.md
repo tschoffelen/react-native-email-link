@@ -106,6 +106,17 @@ Read more about Android tasks [here](https://developer.android.com/guide/compone
 | boolean  | No       | true      | Android  |
 
 
+#### Example
+
+```javascript
+import { openInbox } from 'react-native-email-link'
+
+openInbox({
+	message: 'Whatcha wanna do?',
+	cancelLabel: 'Go back!'
+})
+```
+
 ### openComposer
 
 **Note**: `openComposer()` is only available for iOS. If used with an android device, it will behave exaclty like `openInbox()`. (PRs are welcomed to add Android support)
@@ -199,6 +210,18 @@ Email's body.
 | Type     | Required | Default  |
 | -------- | -------- | -------- |
 | string   | No       | null     |
+
+#### Example
+
+```javascript
+import { openComposer } from 'react-native-email-link'
+
+openComposer({
+	to: 'yourEmail@address.com',
+	subject: 'Wanna change the world?',
+	body: 'This is our year!',
+})
+```
 
 ## Authors
 

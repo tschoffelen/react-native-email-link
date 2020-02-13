@@ -211,6 +211,18 @@ Email's body.
 | -------- | -------- | -------- |
 | string   | No       | null     |
 
+#### Example
+
+```javascript
+import { openComposer } from 'react-native-email-link'
+
+openInbox({
+	to: 'yourEmail@address.com',
+	subject: 'Wanna change the world?',
+	body: 'This is our year!',
+})
+```
+
 ## Authors
 
 This library is developed by [Lean Motherfuckers](https://leanmotherfuckers.com/), a tech consulting

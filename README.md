@@ -52,7 +52,10 @@ Omitting these might mean that the library can't detect some of the mail apps in
 ```javascript
 import { openInbox } from 'react-native-email-link'
 
-openInbox()
+openInbox({
+	message: 'Whatcha wanna do?',
+	cancelLabel: 'Go back!'
+})
 ```
 
 #### Arguments

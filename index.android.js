@@ -40,6 +40,11 @@ export async function openInbox(options = {}) {
   return;
 }
 
-export async function openComposer(options) {
-  throw new EmailException('openComposer not available on Anroid');
+export async function openComposer(options = {}) {
+  let text = options.title || "What app would you like to open?";
+  if (options.removeText) {
+    text = '';
+  }
+  NativeModules.Email.compose(text, options.to, options.subject, options.body);
+  return;
 }

@@ -18,7 +18,7 @@ Currently supported apps:
 ## Installation
 
 ```
-npm i -S react-native-email-link       # or yarn add react-native-email-link
+yarn add react-native-email-link
 ```
 
 This package works with autolinking on RN>=0.60. If you're using an earlier version of React Native, please install version `1.4.0` of the library, or
@@ -112,14 +112,12 @@ Read more about Android tasks [here](https://developer.android.com/guide/compone
 import { openInbox } from 'react-native-email-link'
 
 openInbox({
-	message: 'Whatcha wanna do?',
-	cancelLabel: 'Go back!'
+   message: 'Whatcha wanna do?',
+   cancelLabel: 'Go back!'
 })
 ```
 
 ### openComposer
-
-**Note**: `openComposer()` is only available for iOS. If used with an android device, it will behave exaclty like `openInbox()`. (PRs are welcomed to add Android support)
 
 ```javascript
 import { openComposer } from 'react-native-email-link'
@@ -181,7 +179,7 @@ Recipient's email address.
 
 #### `cc`
 
-Email's cc.
+Email's cc (iOS only).
 
 | Type     | Required | Default  |
 | -------- | -------- | -------- |
@@ -189,7 +187,7 @@ Email's cc.
 
 #### `bcc`
 
-Email's bcc.
+Email's bcc (iOS only).
 
 | Type     | Required | Default  |
 | -------- | -------- | -------- |
@@ -217,9 +215,9 @@ Email's body.
 import { openComposer } from 'react-native-email-link'
 
 openComposer({
-	to: 'yourEmail@address.com',
-	subject: 'Wanna change the world?',
-	body: 'This is our year!',
+   to: 'support@example.com',
+   subject: 'I have a question',
+   body: 'Hi, can you help me with...'
 })
 ```
 

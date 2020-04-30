@@ -1,4 +1,4 @@
-export class EmailException {
+export class EmailException extends Error {
   constructor(message) {
     this.message = message;
     this.name = 'EmailException';

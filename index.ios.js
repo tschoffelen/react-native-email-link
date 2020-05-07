@@ -93,6 +93,14 @@ const uriParams = {
     bcc: 'bcc',
     subject: 'subject',
     body: 'body'
+  },
+  superhuman: {
+    path: 'compose',
+    to: 'to',
+    cc: 'cc',
+    bcc: 'bcc',
+    subject: 'subject',
+    body: 'body'
   }
 }
 

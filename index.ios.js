@@ -180,7 +180,7 @@ export function askAppChoice(
       },
       buttonIndex => {
         if (buttonIndex === options.length - 1) {
-          return resolve(null);
+          return resolve('cancel');
         }
         return resolve(availableApps[buttonIndex]);
       }
@@ -220,6 +220,10 @@ async function getApp(options) {
   if (!app) {
     const { title, message, cancelLabel, removeText } = options;
     app = await askAppChoice(title, message, cancelLabel, removeText);
+  }
+
+  if (app === 'cancel') {
+    throw new EmailException('User cancelled');
   }
 
   if (!app) {

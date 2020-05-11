@@ -164,7 +164,7 @@ export function askAppChoice(
   cancelLabel = 'Cancel',
   removeText = false
 ) {
-  return new Promise(async resolve => {
+  return new Promise(async (resolve, reject) => {
     let availableApps = [];
     for (let app in prefixes) {
       let avail = await isAppInstalled(app);
@@ -174,8 +174,9 @@ export function askAppChoice(
     }
 
     if (!availableApps.length) {
-      throw new EmailException('No email apps available');
-    } else if (availableApps.length === 1) {
+      return reject(new EmailException('No email apps available'));
+    }
+    if (availableApps.length === 1) {
       return resolve(availableApps[0]);
     }
 
@@ -195,8 +196,6 @@ export function askAppChoice(
         return resolve(availableApps[buttonIndex]);
       }
     );
-
-    return;
   });
 }
 

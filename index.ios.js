@@ -93,6 +93,14 @@ const uriParams = {
     bcc: 'bcc',
     subject: 'subject',
     body: 'body'
+  },
+  superhuman: {
+    path: 'compose',
+    to: 'to',
+    cc: 'cc',
+    bcc: 'bcc',
+    subject: 'subject',
+    body: 'body'
   }
 }
 
@@ -156,7 +164,7 @@ export function askAppChoice(
   cancelLabel = 'Cancel',
   removeText = false
 ) {
-  return new Promise(async resolve => {
+  return new Promise(async (resolve, reject) => {
     let availableApps = [];
     for (let app in prefixes) {
       let avail = await isAppInstalled(app);
@@ -165,8 +173,11 @@ export function askAppChoice(
       }
     }
 
-    if (availableApps.length < 2) {
-      return resolve(availableApps[0] || null);
+    if (!availableApps.length) {
+      return reject(new EmailException('No email apps available'));
+    }
+    if (availableApps.length === 1) {
+      return resolve(availableApps[0]);
     }
 
     let options = availableApps.map(app => titles[app]);
@@ -185,13 +196,11 @@ export function askAppChoice(
         return resolve(availableApps[buttonIndex]);
       }
     );
-
-    return;
   });
 }
 
 /**
- * Returns the name of the app provided in the options object of the app selected by the user.
+ * Returns the name of the app provided in the options object or the app selected by the user.
  * @param {{
  *     app: string | undefined | null,
  * }} options 
@@ -222,10 +231,6 @@ async function getApp(options) {
     app = await askAppChoice(title, message, cancelLabel, removeText);
   }
 
-  if (!app) {
-    throw new EmailException('No email app found');
-  }
-
   return app;
 }
 
@@ -242,7 +247,13 @@ async function getApp(options) {
   */
 export async function openInbox(options = {}) {
   const app = await getApp(options);
-  return Linking.openURL(prefixes[app]);
+
+  if (!app) {
+    return null
+  }
+
+  await Linking.openURL(prefixes[app]);
+  return { app, title: titles[app] };
 }
 
 /**
@@ -263,6 +274,11 @@ export async function openInbox(options = {}) {
   */
 export async function openComposer(options) {
   const app = await getApp(options);
+
+  if (!app) {
+    return null
+  }
+
   const params = getUrlParams(app, options);
   let prefix = prefixes[app];
 
@@ -271,5 +287,6 @@ export async function openComposer(options) {
     prefix = 'mailto:';
   }
 
-  return Linking.openURL(`${prefix}${params}`);
+  await Linking.openURL(`${prefix}${params}`);
+  return { app, title: titles[app] };
 }

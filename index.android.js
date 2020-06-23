@@ -45,6 +45,6 @@ export async function openComposer(options = {}) {
   if (options.removeText) {
     text = '';
   }
-  NativeModules.Email.compose(text, options.to, options.subject, options.body);
+  NativeModules.Email.compose(text, options.to, options.subject, options.body && encodeURIComponent(options.body));
   return;
 }

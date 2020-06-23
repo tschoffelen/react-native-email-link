@@ -4,13 +4,13 @@ export function openInbox({
   message,
   cancelLabel,
   removeText,
-}: {
+}?: {
   app?: string | null;
   title?: string;
   message?: string;
   cancelLabel?: string;
   removeText?: boolean;
-}): Promise<void>;
+}): Promise<{ app: string; title: string; } | null>;
 
 export function openComposer({
   app,
@@ -23,7 +23,7 @@ export function openComposer({
   bcc,
   subject,
   body,
-}: {
+}?: {
   app?: string | null;
   title?: string;
   message?: string;
@@ -34,7 +34,7 @@ export function openComposer({
   bcc?: string;
   subject?: string;
   body?: string;
-}): Promise<void>;
+}): Promise<{ app: string; title: string; } | null>;
 
 export class EmailException {
   message: string;

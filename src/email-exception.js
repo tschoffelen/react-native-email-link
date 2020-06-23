@@ -1,6 +1,6 @@
 export class EmailException extends Error {
-  constructor(message) {
-    this.message = message;
+  constructor(...params) {
+    super(...params)
     this.name = 'EmailException';
   }
 }

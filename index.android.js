@@ -63,6 +63,6 @@ export async function openComposer(options = {}) {
     body = encodeURIComponent(body);
   }
 
-  NativeModules.Email.compose(text, options.to, options.subject, body);
+  NativeModules.Email.compose(text, options.to, options.subject || '', body);
   return;
 }

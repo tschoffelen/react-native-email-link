@@ -4,7 +4,7 @@
  * This file supports both iOS and Android.
  */
 
-import { NativeModules } from "react-native";
+import { NativeModules } from 'react-native';
 import { EmailException } from './src/email-exception';
 export { EmailException };
 
@@ -20,19 +20,19 @@ export { EmailException };
  */
 export async function openInbox(options = {}) {
   // We can't pre-choose, since we use native intents
-  if (!("Email" in NativeModules)) {
+  if (!('Email' in NativeModules)) {
     throw new EmailException(
-      "NativeModules.Email does not exist. Check if you installed the Android dependencies correctly."
+      'NativeModules.Email does not exist. Check if you installed the Android dependencies correctly.'
     );
   }
 
-  let text = options.title || "What app would you like to open?";
+  let text = options.title || 'What app would you like to open?';
   if (options.removeText) {
     text = '';
   }
 
   let newTask = true;
-  if ("newTask" in options) {
+  if ('newTask' in options) {
     newTask = Boolean(options.newTask);
   }
 
@@ -40,11 +40,29 @@ export async function openInbox(options = {}) {
   return;
 }
 
+/**
+ * Open an email app on the compose screen, or let the user choose what app to open on the compose screen.
+ *
+ * @param {{
+ *     title: string,
+ *     removeText: boolean,
+ *     to: string,
+ *     subject: string,
+ *     body: string,
+ *     encodeBody: boolean
+ * }} options
+ */
 export async function openComposer(options = {}) {
-  let text = options.title || "What app would you like to open?";
+  let body = options.body || '';
+  let text = options.title || 'What app would you like to open?';
   if (options.removeText) {
     text = '';
   }
-  NativeModules.Email.compose(text, options.to, options.subject, options.body && encodeURIComponent(options.body));
+
+  if (options.encodeBody) {
+    body = encodeURIComponent(body);
+  }
+
+  NativeModules.Email.compose(text, options.to, options.subject || '', body);
   return;
 }

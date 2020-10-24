@@ -128,14 +128,15 @@ openComposer()
 #### Arguments
 
 - [`title`](#title)
-- [`message`](#message)
-- [`cancelLabel`](#cancelLabel)
+- [`message`](#message) (iOS only)
+- [`cancelLabel`](#cancelLabel) (iOS only)
 - [`removeText`](#removeText)
 - [`to`](#to)
-- [`cc`](#cc)
-- [`bcc`](#bcc)
+- [`cc`](#cc) (iOS only)
+- [`bcc`](#bcc) (iOS only)
 - [`subject`](#subject)
 - [`body`](#body)
+- [`encodeBody`](#encodeBody)
 
 #### `title`
 
@@ -208,6 +209,14 @@ Email's body.
 | Type     | Required | Default  |
 | -------- | -------- | -------- |
 | string   | No       | null     |
+
+#### `encodeBody`
+
+Apply `encodeURIComponent` to the email's body.
+
+| Type    | Required | Default |
+| ------- | -------- | ------- |
+| boolean | No       | false   |
 
 #### Example
 

@@ -16,7 +16,7 @@ const prefixes = {
   airmail: 'airmail://',
   outlook: 'ms-outlook://',
   yahoo: 'ymail://',
-  superhuman: 'superhuman://'
+  superhuman: 'superhuman://',
 };
 
 const titles = {
@@ -27,13 +27,13 @@ const titles = {
   airmail: 'Airmail',
   outlook: 'Outlook',
   yahoo: 'Yahoo Mail',
-  superhuman: 'Superhuman'
+  superhuman: 'Superhuman',
 };
 
 /**
  * Allowed params for each app url
  *  - apple-mail: https://ios.gadgethacks.com/news/always-updated-list-ios-app-url-scheme-names-0184033/
- *  - gmail: https://stackoverflow.com/questions/32114455/open-gmail-app-from-my-app 
+ *  - gmail: https://stackoverflow.com/questions/32114455/open-gmail-app-from-my-app
  *  - inbox: https://stackoverflow.com/questions/29655978/is-there-an-ios-mail-scheme-url-for-googles-inbox
  *  - spark: https://helpspot.readdle.com/spark/index.php?pg=kb.page&id=791
  *  - airmail: https://help.airmailapp.com/en-us/article/airmail-ios-url-scheme-1q060gy/
@@ -44,7 +44,7 @@ const uriParams = {
     cc: 'cc',
     bcc: 'bcc',
     subject: 'subject',
-    body: 'body'
+    body: 'body',
   },
   gmail: {
     path: 'co',
@@ -52,7 +52,7 @@ const uriParams = {
     cc: 'cc',
     bcc: 'bcc',
     subject: 'subject',
-    body: 'body'
+    body: 'body',
   },
   inbox: {
     path: 'co',
@@ -60,7 +60,7 @@ const uriParams = {
     cc: 'cc',
     bcc: 'bcc',
     subject: 'subject',
-    body: 'body'
+    body: 'body',
   },
   spark: {
     path: 'compose',
@@ -68,7 +68,7 @@ const uriParams = {
     cc: 'cc',
     bcc: 'bcc',
     subject: 'subject',
-    body: 'body'
+    body: 'body',
   },
   airmail: {
     path: 'compose',
@@ -84,7 +84,7 @@ const uriParams = {
     cc: 'cc',
     bcc: 'bcc',
     subject: 'subject',
-    body: 'body'
+    body: 'body',
   },
   yahoo: {
     path: 'mail/compose',
@@ -92,7 +92,7 @@ const uriParams = {
     cc: 'cc',
     bcc: 'bcc',
     subject: 'subject',
-    body: 'body'
+    body: 'body',
   },
   superhuman: {
     path: 'compose',
@@ -100,9 +100,9 @@ const uriParams = {
     cc: 'cc',
     bcc: 'bcc',
     subject: 'subject',
-    body: 'body'
-  }
-}
+    body: 'body',
+  },
+};
 
 /**
  * Returns param to open app compose screen and pre-fill 'to', 'subject' and 'body',
@@ -113,13 +113,15 @@ const uriParams = {
  *     bcc: string,
  *     subject: string,
  *     body: string,
- * }} options 
+ * }} options
  */
 function getUrlParams(app, options) {
   const appParms = uriParams[app];
-  if (!appParms) { return '' };
+  if (!appParms) {
+    return '';
+  }
 
-  const path = app === 'apple-mail' ? (options['to'] || '') : appParms['path'];
+  const path = app === 'apple-mail' ? options['to'] || '' : appParms['path'];
   const urlParams = Object.keys(appParms).reduce((params, currentParam) => {
     if (options[currentParam]) {
       params.push(`${appParms[currentParam]}=${options[currentParam]}`);
@@ -137,13 +139,13 @@ function getUrlParams(app, options) {
  * @returns {Promise<boolean>}
  */
 export function isAppInstalled(app) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     if (!(app in prefixes)) {
       return resolve(false);
     }
 
     Linking.canOpenURL(prefixes[app])
-      .then(isSupported => {
+      .then((isSupported) => {
         resolve(isSupported);
       })
       .catch(() => resolve(false));
@@ -180,16 +182,16 @@ export function askAppChoice(
       return resolve(availableApps[0]);
     }
 
-    let options = availableApps.map(app => titles[app]);
+    let options = availableApps.map((app) => titles[app]);
     options.push(cancelLabel);
 
     ActionSheetIOS.showActionSheetWithOptions(
       {
         options: options,
         cancelButtonIndex: options.length - 1,
-        ...(removeText ? {} : { title, message })
+        ...(removeText ? {} : { title, message }),
       },
-      buttonIndex => {
+      (buttonIndex) => {
         if (buttonIndex === options.length - 1) {
           return resolve(null);
         }
@@ -203,13 +205,11 @@ export function askAppChoice(
  * Returns the name of the app provided in the options object or the app selected by the user.
  * @param {{
  *     app: string | undefined | null,
- * }} options 
+ * }} options
  */
 async function getApp(options) {
   if (options && typeof options !== 'object') {
-    throw new EmailException(
-      'First parameter must be an object of options.'
-    );
+    throw new EmailException('First parameter must be an object of options.');
   }
 
   if (
@@ -238,18 +238,18 @@ async function getApp(options) {
  * Open an email app, or let the user choose what app to open.
  *
  * @param {{
-  *     app: string | undefined | null,
-  *     title: string,
-  *     message: string,
-  *     cancelLabel: string,
-  *     removeText: boolean
-  * }} options
-  */
+ *     app: string | undefined | null,
+ *     title: string,
+ *     message: string,
+ *     cancelLabel: string,
+ *     removeText: boolean
+ * }} options
+ */
 export async function openInbox(options = {}) {
   const app = await getApp(options);
 
   if (!app) {
-    return null
+    return null;
   }
 
   await Linking.openURL(prefixes[app]);
@@ -260,23 +260,28 @@ export async function openInbox(options = {}) {
  * Open an email app on the compose screen, or let the user choose what app to open on the compose screen.
  *
  * @param {{
-  *     app: string | undefined | null,
-  *     title: string,
-  *     message: string,
-  *     cancelLabel: string,
-  *     removeText: boolean,
-  *     to: string,
-  *     cc: string,
-  *     bcc: string,
-  *     subject: string,
-  *     body: string
-  * }} options
-  */
+ *     app: string | undefined | null,
+ *     title: string,
+ *     message: string,
+ *     cancelLabel: string,
+ *     removeText: boolean,
+ *     to: string,
+ *     cc: string,
+ *     bcc: string,
+ *     subject: string,
+ *     body: string,
+ *     encodeBody: boolean
+ * }} options
+ */
 export async function openComposer(options) {
   const app = await getApp(options);
 
   if (!app) {
-    return null
+    return null;
+  }
+
+  if (options.encodeBody) {
+    options.body = encodeURIComponent(options.body);
   }
 
   const params = getUrlParams(app, options);

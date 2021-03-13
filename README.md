@@ -1,7 +1,13 @@
 # React Native Email Link
 
+[![GitHub release](https://img.shields.io/github/release/flexible-agency/react-native-email-link.svg)](https://github.com/flexible-agency/react-native-email-link/releases)
+[![NPM](https://img.shields.io/npm/dm/react-native-map-link.svg)](https://www.npmjs.com/package/react-native-email-link)
+[![GitHub license](https://img.shields.io/github/license/flexible-agency/react-native-email-link.svg)](https://github.com/flexible-agency/react-native-email-link/blob/master/LICENSE)
+
+---
+
 An easy way to open an email app of the user's choice, based on the apps they have installed
-on their device.
+on their device. Very helpful for magic link logins.
 
 Currently supported apps:
 
@@ -16,6 +22,8 @@ Currently supported apps:
 
 ## Installation
 
+### 1. Install the package
+
 ```
 yarn add react-native-email-link
 ```
@@ -23,13 +31,10 @@ yarn add react-native-email-link
 This package works with autolinking on RN>=0.60. If you're using an earlier version of React Native, please install version `1.4.0` of the library, or
 check out the legacy [rnpm](https://github.com/leanmotherfuckers/react-native-email-link/tree/rnpm) branch.
 
-### A note about iOS 9+
+### 2. Update your Info.plist
+To allow your app to detect if any of the directions apps are installed, an extra step is required on iOS. Your app needs to provide the `LSApplicationQueriesSchemes` key inside `ios/{my-project}/Info.plist` to specify the URL schemes with which the app can interact.
 
-As of iOS 9, your app needs to provide the `LSApplicationQueriesSchemes` key inside
-Info.plist to specify the URL schemes with which the app can interact.
-
-Just put this in your Info.plist depending on which apps you'd like to support.
-Omitting these might mean that the library can't detect some of the mail apps installed by the user.
+Just add this in your `Info.plist` depending on which apps you'd like to support. Omitting these might mean that the library can't detect some of the maps apps installed by the user.
 
 ```
 <key>LSApplicationQueriesSchemes</key>

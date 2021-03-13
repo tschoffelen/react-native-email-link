@@ -1,4 +1,4 @@
-package com.facebook.react.modules.email;
+package agency.flexible.react.modules.email;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;

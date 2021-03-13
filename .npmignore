@@ -1,0 +1,6 @@
+/example
+/docs
+/tests
+.github
+.idea
+.prettierrc.json

@@ -19,10 +19,7 @@ export async function openInbox(options = {}) {
     );
   }
 
-  let text = options.title || "What app would you like to open?";
-  if (options.removeText) {
-    text = "";
-  }
+  let text = options.removeText ? "" : (options.title || "What app would you like to open?");
 
   let newTask = true;
   if ("newTask" in options) {
@@ -55,6 +52,5 @@ export async function openComposer(options = {}) {
     body = encodeURIComponent(body);
   }
 
-  NativeModules.Email.compose(text, options.to, options.subject || "", body);
-  return;
+  return NativeModules.Email.compose(text, options.to, options.subject || "", body);
 }

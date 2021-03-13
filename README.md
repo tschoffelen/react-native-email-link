@@ -1,7 +1,7 @@
 # React Native Email Link
 
 [![GitHub release](https://img.shields.io/github/release/flexible-agency/react-native-email-link.svg)](https://github.com/flexible-agency/react-native-email-link/releases)
-[![NPM](https://img.shields.io/npm/dm/react-native-map-link.svg)](https://www.npmjs.com/package/react-native-email-link)
+[![NPM](https://img.shields.io/npm/dm/react-native-email-link.svg)](https://www.npmjs.com/package/react-native-email-link)
 [![GitHub license](https://img.shields.io/github/license/flexible-agency/react-native-email-link.svg)](https://github.com/flexible-agency/react-native-email-link/blob/master/LICENSE)
 
 ---

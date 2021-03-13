@@ -9,3 +9,4 @@ android/build/
 .DS_Store
 *.iml
 local.properties
+package-lock.json

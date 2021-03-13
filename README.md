@@ -5,15 +5,14 @@ on their device.
 
 Currently supported apps:
 
-* Apple Mail
-* Gmail
-* Inbox
-* Spark
-* Airmail
-* Outlook
-* Yahoo Mail
-* Superhuman
-
+- Apple Mail
+- Gmail
+- Inbox
+- Spark
+- Airmail
+- Outlook
+- Yahoo Mail
+- Superhuman
 
 ## Installation
 
@@ -25,6 +24,7 @@ This package works with autolinking on RN>=0.60. If you're using an earlier vers
 check out the legacy [rnpm](https://github.com/leanmotherfuckers/react-native-email-link/tree/rnpm) branch.
 
 ### A note about iOS 9+
+
 As of iOS 9, your app needs to provide the `LSApplicationQueriesSchemes` key inside
 Info.plist to specify the URL schemes with which the app can interact.
 
@@ -50,9 +50,9 @@ Omitting these might mean that the library can't detect some of the mail apps in
 ### openInbox
 
 ```javascript
-import { openInbox } from 'react-native-email-link'
+import { openInbox } from "react-native-email-link";
 
-openInbox()
+openInbox();
 ```
 
 #### Arguments
@@ -67,33 +67,33 @@ openInbox()
 
 Text for the top of the ActionSheet or Intent.
 
-| Type     | Required | Default         |
-| -------- | -------- | --------------- |
-| string   | No       | 'Open mail app' |
+| Type   | Required | Default         |
+| ------ | -------- | --------------- |
+| string | No       | 'Open mail app' |
 
 #### `message`
 
 Subtext under the title on the ActionSheet
 
-| Type     | Required | Default                             | Platform |
-| -------- | -------- | ----------------------------------- | -------- |
-| string   | No       | 'Which app would you like to open?' | iOS      |
+| Type   | Required | Default                             | Platform |
+| ------ | -------- | ----------------------------------- | -------- |
+| string | No       | 'Which app would you like to open?' | iOS      |
 
 #### `cancelLabel`
 
 Text for last button of the ActionSheet.
 
-| Type     | Required | Default   | Platform |
-| -------- | -------- | --------- | -------- |
-| string   | No       | 'Cancel'  | iOS      |
+| Type   | Required | Default  | Platform |
+| ------ | -------- | -------- | -------- |
+| string | No       | 'Cancel' | iOS      |
 
 #### `removeText`
 
 If true, not text will be show above the ActionSheet or Intent. Default value is false.
 
-| Type     | Required | Default  |
-| -------- | -------- | -------- |
-| boolean  | No       | false    |
+| Type    | Required | Default |
+| ------- | -------- | ------- |
+| boolean | No       | false   |
 
 #### `newTask`
 
@@ -101,28 +101,27 @@ If true, the email Intent will be started in a new Android task. Else, the Inten
 
 Read more about Android tasks [here](https://developer.android.com/guide/components/activities/tasks-and-back-stack).
 
-| Type     | Required | Default   | Platform |
-| -------- | -------- | --------- | -------- |
-| boolean  | No       | true      | Android  |
-
+| Type    | Required | Default | Platform |
+| ------- | -------- | ------- | -------- |
+| boolean | No       | true    | Android  |
 
 #### Example
 
 ```javascript
-import { openInbox } from 'react-native-email-link'
+import { openInbox } from "react-native-email-link";
 
 openInbox({
-   message: 'Whatcha wanna do?',
-   cancelLabel: 'Go back!'
-})
+  message: "Whatcha wanna do?",
+  cancelLabel: "Go back!",
+});
 ```
 
 ### openComposer
 
 ```javascript
-import { openComposer } from 'react-native-email-link'
+import { openComposer } from "react-native-email-link";
 
-openComposer()
+openComposer();
 ```
 
 #### Arguments
@@ -142,73 +141,73 @@ openComposer()
 
 Text for the top of the ActionSheet or Intent.
 
-| Type     | Required | Default         |
-| -------- | -------- | --------------- |
-| string   | No       | 'Open mail app' |
+| Type   | Required | Default         |
+| ------ | -------- | --------------- |
+| string | No       | 'Open mail app' |
 
 #### `message`
 
 Subtext under the title on the ActionSheet.
 
-| Type     | Required | Default                             | Platform |
-| -------- | -------- | ----------------------------------- | -------- |
-| string   | No       | 'Which app would you like to open?' | iOS      |
+| Type   | Required | Default                             | Platform |
+| ------ | -------- | ----------------------------------- | -------- |
+| string | No       | 'Which app would you like to open?' | iOS      |
 
 #### `cancelLabel`
 
 Text for last button of the ActionSheet.
 
-| Type     | Required | Default   | Platform |
-| -------- | -------- | --------- | -------- |
-| string   | No       | 'Cancel'  | iOS      |
+| Type   | Required | Default  | Platform |
+| ------ | -------- | -------- | -------- |
+| string | No       | 'Cancel' | iOS      |
 
 #### `removeText`
 
 If true, not text will be show above the ActionSheet or Intent. Default value is false.
 
-| Type     | Required | Default  |
-| -------- | -------- | -------- |
-| boolean  | No       | false    |
+| Type    | Required | Default |
+| ------- | -------- | ------- |
+| boolean | No       | false   |
 
 #### `to`
 
 Recipient's email address.
 
-| Type     | Required | Default  |
-| -------- | -------- | -------- |
-| string   | No       | null     |
+| Type   | Required | Default |
+| ------ | -------- | ------- |
+| string | No       | null    |
 
 #### `cc`
 
 Email's cc (iOS only).
 
-| Type     | Required | Default  |
-| -------- | -------- | -------- |
-| string   | No       | null     |
+| Type   | Required | Default |
+| ------ | -------- | ------- |
+| string | No       | null    |
 
 #### `bcc`
 
 Email's bcc (iOS only).
 
-| Type     | Required | Default  |
-| -------- | -------- | -------- |
-| string   | No       | null     |
+| Type   | Required | Default |
+| ------ | -------- | ------- |
+| string | No       | null    |
 
 #### `subject`
 
 Email's subject.
 
-| Type     | Required | Default  |
-| -------- | -------- | -------- |
-| string   | No       | null     |
+| Type   | Required | Default |
+| ------ | -------- | ------- |
+| string | No       | null    |
 
 #### `body`
 
 Email's body.
 
-| Type     | Required | Default  |
-| -------- | -------- | -------- |
-| string   | No       | null     |
+| Type   | Required | Default |
+| ------ | -------- | ------- |
+| string | No       | null    |
 
 #### `encodeBody`
 
@@ -221,13 +220,13 @@ Apply `encodeURIComponent` to the email's body.
 #### Example
 
 ```javascript
-import { openComposer } from 'react-native-email-link'
+import { openComposer } from "react-native-email-link";
 
 openComposer({
-   to: 'support@example.com',
-   subject: 'I have a question',
-   body: 'Hi, can you help me with...'
-})
+  to: "support@example.com",
+  subject: "I have a question",
+  body: "Hi, can you help me with...",
+});
 ```
 
 ## Authors
@@ -237,5 +236,5 @@ company like no other.
 
 Contributors:
 
-* Thomas Schoffelen, [@tschoffelen](https://twitter.com/tschoffelen)
-* César Jeanroy, [@cesar3030](https://github.com/cesar3030)
+- Thomas Schoffelen, [@tschoffelen](https://twitter.com/tschoffelen)
+- César Jeanroy, [@cesar3030](https://github.com/cesar3030)

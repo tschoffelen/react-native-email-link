@@ -2,8 +2,8 @@ module.exports = {
   dependency: {
     platforms: {
       android: {
-        sourceDir: './android'
-      }
-    }
-  }
-}
+        sourceDir: "./android",
+      },
+    },
+  },
+};

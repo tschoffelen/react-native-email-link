@@ -33,11 +33,11 @@ check out the legacy [rnpm](https://github.com/leanmotherfuckers/react-native-em
 
 ### 2. Update your Info.plist
 
-To allow your app to detect if any of the directions apps are installed, an extra step is required on iOS. Your app needs to provide the `LSApplicationQueriesSchemes` key inside `ios/{my-project}/Info.plist` to specify the URL schemes with which the app can interact.
+To allow your app to detect if any of the mailbox apps are installed, an extra step is required on iOS. Your app needs to provide the `LSApplicationQueriesSchemes` key inside `ios/{my-project}/Info.plist` to specify the URL schemes with which the app can interact.
 
 Just add this in your `Info.plist` depending on which apps you'd like to support. Omitting these might mean that the library can't detect some of the maps apps installed by the user.
 
-```
+```xml
 <key>LSApplicationQueriesSchemes</key>
 <array>
     <string>message</string>
@@ -50,6 +50,9 @@ Just add this in your `Info.plist` depending on which apps you'd like to support
     <string>superhuman</string>
 </array>
 ```
+
+Using Expo? [Read the instructions](docs/expo.md) to make it work on iOS.
+
 
 ## Usage
 

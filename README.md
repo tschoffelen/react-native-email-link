@@ -53,7 +53,6 @@ Just add this in your `Info.plist` depending on which apps you'd like to support
 
 Using Expo? [Read the instructions](docs/expo.md) to make it work on iOS.
 
-
 ## Usage
 
 ### openInbox

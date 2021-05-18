@@ -10,6 +10,7 @@ const prefixes = {
   outlook: "ms-outlook://",
   yahoo: "ymail://",
   superhuman: "superhuman://",
+  yandex: "yandexmail://",
 };
 
 const titles = {
@@ -21,6 +22,7 @@ const titles = {
   outlook: "Outlook",
   yahoo: "Yahoo Mail",
   superhuman: "Superhuman",
+  yandex: "Yandex",
 };
 
 /**
@@ -95,6 +97,9 @@ const uriParams = {
     subject: "subject",
     body: "body",
   },
+  yandex: {
+    path: "compose",
+  }
 };
 
 /**

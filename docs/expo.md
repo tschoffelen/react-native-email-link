@@ -19,7 +19,8 @@ Simply add the following to your Expo app's `app.json` file:
          "googlegmail",
          "inbox-gmail",
          "ymail",
-         "superhuman"
+         "superhuman",
+         "yandexmail"
       ]
    }
 }

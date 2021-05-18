@@ -19,6 +19,7 @@ Currently supported apps:
 - Outlook
 - Yahoo Mail
 - Superhuman
+- Yandex
 
 ## Installation
 
@@ -48,6 +49,7 @@ Just add this in your `Info.plist` depending on which apps you'd like to support
     <string>inbox-gmail</string>
     <string>ymail</string>
     <string>superhuman</string>
+    <string>yandexmail</string>
 </array>
 ```
 

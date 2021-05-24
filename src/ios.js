@@ -99,7 +99,7 @@ const uriParams = {
   },
   yandex: {
     path: "compose",
-  }
+  },
 };
 
 /**

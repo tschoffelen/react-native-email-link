@@ -32,7 +32,12 @@ yarn add react-native-email-link
 This package works with autolinking on RN>=0.60. If you're using an earlier version of React Native, please install version `1.4.0` of the library, or
 check out the legacy [rnpm](https://github.com/leanmotherfuckers/react-native-email-link/tree/rnpm) branch.
 
-### 2. Update your Info.plist
+### 2. Post-install steps
+
+Based on the platforms your app supports, you also need to:
+
+<details>
+<summary><strong>iOS – Update Info.plist</strong></summary>
 
 To allow your app to detect if any of the mailbox apps are installed, an extra step is required on iOS. Your app needs to provide the `LSApplicationQueriesSchemes` key inside `ios/{my-project}/Info.plist` to specify the URL schemes with which the app can interact.
 
@@ -54,6 +59,33 @@ Just add this in your `Info.plist` depending on which apps you'd like to support
 ```
 
 Using Expo? [Read the instructions](docs/expo.md) to make it work on iOS.
+
+</details>
+
+<details>
+<summary><strong>Android – Update AndroidManifest.xml</strong></summary>
+
+When switching to Android 11/Android SDK 30 (i.e. using Expo SDK 41), this library doesn't work out of the box anymore. The reason is the new [Package Visibilty](https://developer.android.com/training/package-visibility) security feature. We'll have to update our `AndroidManifest.xml` to explicitly allow querying for other apps.
+
+You can do so by coping the `<queries>` statement below, and pasting it in the top level of your AndroidManifest (i.e. within the `<manifest> ... </manifest>`).
+
+```xml
+<queries>
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="mailto"/>
+  </intent>
+</queries>
+```
+
+</details>
+
+<details>
+<summary><strong>Expo – Update app.json</strong></summary>
+
+[Read the instructions here](docs/expo.md) to make it work on iOS.
+
+</details>
 
 ## Usage
 

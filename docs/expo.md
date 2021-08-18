@@ -32,4 +32,4 @@ Simply add the following to your Expo app's `app.json` file:
 
 You can usually do so by running `expo build:ios`.
 
-Also note that this will only work when building your own [standalone app](https://docs.expo.io/versions/latest/distribution/building-standalone-apps), not when starting your app through the Expo app in the App Store.
+Also note that this will only work when building your own [standalone app](https://docs.expo.dev/distribution/building-standalone-apps/), not when starting your app through the Expo app in the App Store.

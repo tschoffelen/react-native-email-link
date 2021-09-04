@@ -273,10 +273,26 @@ openComposer({
 
 ## Authors
 
-This library is developed by [Lean Motherfuckers](https://leanmotherfuckers.com/), a tech consulting
+This library is developed by [Flexible Agency](https://flexible.agency/), a tech consulting
 company like no other.
 
 Contributors:
 
 - Thomas Schoffelen, [@tschoffelen](https://twitter.com/tschoffelen)
 - César Jeanroy, [@cesar3030](https://github.com/cesar3030)
+
+
+
+<br /><br />
+
+---
+
+<div align="center">
+	<b>
+		<a href="https://schof.co/consulting/?utm_source=flexible-agency/react-native-email-link">Get professional support for this package →</a>
+	</b>
+	<br>
+	<sub>
+		Custom consulting sessions availabe by request, just message thomas at schof dot co.
+	</sub>
+</div>

@@ -27,8 +27,8 @@ buildscript {
     }
 
     repositories {
-        jcenter()
         google()
+        mavenCentral()
     }
 
     dependencies {
@@ -59,8 +59,8 @@ repositories {
     maven {
         url "$projectDir/../../react-native/android"
     }
-    jcenter()
     google()
+    mavenCentral()
 }
 
 dependencies {

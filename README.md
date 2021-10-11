@@ -20,6 +20,8 @@ Currently supported apps:
 - Yahoo Mail
 - Superhuman
 - Yandex
+- ProtonMail
+- Fastmail
 
 ## Installation
 

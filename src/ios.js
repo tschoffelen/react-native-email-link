@@ -11,6 +11,8 @@ const prefixes = {
   yahoo: "ymail://",
   superhuman: "superhuman://",
   yandex: "yandexmail://",
+  fastmail: "fastmail://",
+  protonmail: "protonmail://",
 };
 
 const titles = {
@@ -23,6 +25,8 @@ const titles = {
   yahoo: "Yahoo Mail",
   superhuman: "Superhuman",
   yandex: "Yandex",
+  fastmail: "Fastmail",
+  protonmail: "ProtonMail",
 };
 
 /**
@@ -33,6 +37,7 @@ const titles = {
  *  - spark: https://helpspot.readdle.com/spark/index.php?pg=kb.page&id=791
  *  - airmail: https://help.airmailapp.com/en-us/article/airmail-ios-url-scheme-1q060gy/
  *  - outlook: https://stackoverflow.com/questions/32369198/i-just-want-to-open-ms-outlook-app-and-see-mailto-screen-using-url-scheme-at-ios
+ *  - fastmail: https://github.com/vtourraine/ThirdPartyMailer/blob/1.8.0/Sources/ThirdPartyMailer/ThirdPartyMailClient.swift#L80
  */
 const uriParams = {
   "apple-mail": {
@@ -98,6 +103,17 @@ const uriParams = {
     body: "body",
   },
   yandex: {
+    path: "compose",
+  },
+  fastmail: {
+    path: "mail/compose",
+    to: "to",
+    cc: "cc",
+    bcc: "bcc",
+    subject: "subject",
+    body: "body",
+  },
+  protonmail: {
     path: "compose",
   },
 };

@@ -57,6 +57,8 @@ Just add this in your `Info.plist` depending on which apps you'd like to support
     <string>ymail</string>
     <string>superhuman</string>
     <string>yandexmail</string>
+    <string>fastmail</string>
+    <string>protonmail</string>
 </array>
 ```
 

@@ -61,33 +61,24 @@ Just add this in your `Info.plist` depending on which apps you'd like to support
     <string>protonmail</string>
 </array>
 ```
-
-Using Expo? [Read the instructions](docs/expo.md) to make it work on iOS.
-
 </details>
 
 <details>
-<summary><strong>Android – Update AndroidManifest.xml</strong></summary>
+<summary><strong>Expo – Enable Config Plugin</strong></summary>
 
-When switching to Android 11/Android SDK 30 (i.e. using Expo SDK 41), this library doesn't work out of the box anymore. The reason is the new [Package Visibilty](https://developer.android.com/training/package-visibility) security feature. We'll have to update our `AndroidManifest.xml` to explicitly allow querying for other apps.
+To allow the library to work with Expo you need to enable the [config plugin](https://docs.expo.dev/guides/config-plugins/). This plugin will automatically configure your Expo application with the correct settings for this library to function.
 
-You can do so by coping the `<queries>` statement below, and pasting it in the top level of your AndroidManifest (i.e. within the `<manifest> ... </manifest>`).
+To enable the config plugin, add it to the `plugins` array inside your `app.config.js`/`app.config.json`. For example:
 
-```xml
-<queries>
-  <intent>
-    <action android:name="android.intent.action.VIEW" />
-    <data android:scheme="mailto"/>
-  </intent>
-</queries>
+```json
+{
+  "name": "my app",
+  "plugins": ["react-native-email-link"]
+}
+
 ```
 
-</details>
-
-<details>
-<summary><strong>Expo – Update app.json</strong></summary>
-
-[Read the instructions here](docs/expo.md) to make it work on iOS.
+Want this library to work on Android too? Because the library uses native code on Android you need to [follow Expo's guide](https://docs.expo.dev/workflow/customizing/) for custom native code.
 
 </details>
 
@@ -297,6 +288,6 @@ Contributors:
 	</b>
 	<br>
 	<sub>
-		Custom consulting sessions availabe for implementation support or feature development.
+		Custom consulting sessions available for implementation support or feature development.
 	</sub>
 </div>

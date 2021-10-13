@@ -1,10 +1,7 @@
 /**
  * Adds the given query schemes to the infoPlist app config
  */
-const withLSApplicationQueriesSchemes = (
-  config,
-  schemes
-) => {
+const withLSApplicationQueriesSchemes = (config, schemes) => {
   if (!config.ios) {
     config.ios = {};
   }

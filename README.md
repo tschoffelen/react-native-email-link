@@ -61,6 +61,7 @@ Just add this in your `Info.plist` depending on which apps you'd like to support
     <string>protonmail</string>
 </array>
 ```
+
 </details>
 
 <details>
@@ -75,7 +76,6 @@ To enable the config plugin, add it to the `plugins` array inside your `app.conf
   "name": "my app",
   "plugins": ["react-native-email-link"]
 }
-
 ```
 
 Want this library to work on Android too? Because the library uses native code on Android you need to [follow Expo's guide](https://docs.expo.dev/workflow/customizing/) for custom native code.
@@ -265,20 +265,6 @@ openComposer({
   body: "Hi, can you help me with...",
 });
 ```
-
-## Authors
-
-This library is developed by [Flexible Agency](https://flexible.agency/), a tech consulting
-company like no other.
-
-Contributors:
-
-- Thomas Schoffelen, [@tschoffelen](https://twitter.com/tschoffelen)
-- César Jeanroy, [@cesar3030](https://github.com/cesar3030)
-
-
-
-<br /><br />
 
 ---
 

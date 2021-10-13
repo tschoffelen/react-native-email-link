@@ -4,3 +4,4 @@
 .github
 .idea
 .prettierrc.json
+/android/build

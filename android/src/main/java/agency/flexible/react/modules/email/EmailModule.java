@@ -64,7 +64,7 @@ public class EmailModule extends ReactContextBaseJavaModule {
 
             promise.resolve(true);
         } else {
-            promise.reject("EmailException", "No email apps available");
+            promise.reject("NoEmailAppsAvailable", "No email apps available");
         }
     }
 

@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -27,7 +28,7 @@ public class EmailModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void open(final String title, final boolean newTask) {
+    public void open(final String title, final boolean newTask, final Promise promise) {
         Intent emailIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:"));
         PackageManager pm = getCurrentActivity().getPackageManager();
 
@@ -60,6 +61,10 @@ public class EmailModule extends ReactContextBaseJavaModule {
                 setNewTaskFlag(openInChooser, newTask);
                 getCurrentActivity().startActivity(openInChooser);
             }
+
+            promise.resolve(true);
+        } else {
+            promise.reject("NoEmailAppsAvailable", "No email apps available");
         }
     }
 

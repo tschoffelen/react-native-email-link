@@ -178,7 +178,8 @@ export function askAppChoice(
   title = "Open mail app",
   message = "Which app would you like to open?",
   cancelLabel = "Cancel",
-  removeText = false
+  removeText = false,
+  actionType = "open"
 ) {
   return new Promise(async (resolve, reject) => {
     let availableApps = [];
@@ -196,7 +197,11 @@ export function askAppChoice(
       return resolve(availableApps[0]);
     }
 
-    let options = availableApps.map((app) => titles[app]);
+    let options = availableApps.map((app) =>
+      actionType === "compose" && app === "apple-mail"
+        ? "default mail client"
+        : titles[app]
+    );
     options.push(cancelLabel);
 
     ActionSheetIOS.showActionSheetWithOptions(
@@ -220,9 +225,10 @@ export function askAppChoice(
  * @param {{
  *     app: string | undefined | null,
  * }} options
+ * @param {("open" | "compose")} actionType
  * @return string
  */
-async function getApp(options) {
+async function getApp(options, actionType) {
   if (options && typeof options !== "object") {
     throw new EmailException("First parameter must be an object of options.");
   }
@@ -243,7 +249,13 @@ async function getApp(options) {
 
   if (!app) {
     const { title, message, cancelLabel, removeText } = options;
-    app = await askAppChoice(title, message, cancelLabel, removeText);
+    app = await askAppChoice(
+      title,
+      message,
+      cancelLabel,
+      removeText,
+      actionType
+    );
   }
 
   return app;
@@ -261,7 +273,7 @@ async function getApp(options) {
  * }} options
  */
 export async function openInbox(options = {}) {
-  const app = await getApp(options);
+  const app = await getApp(options, "open");
 
   if (!app) {
     return null;
@@ -289,7 +301,7 @@ export async function openInbox(options = {}) {
  * }} options
  */
 export async function openComposer(options) {
-  const app = await getApp(options);
+  const app = await getApp(options, "compose");
 
   if (!app) {
     return null;

@@ -199,7 +199,7 @@ export function askAppChoice(
 
     let options = availableApps.map((app) =>
       actionType === "compose" && app === "apple-mail"
-        ? "default mail client"
+        ? "Default email reader"
         : titles[app]
     );
     options.push(cancelLabel);

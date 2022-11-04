@@ -13,6 +13,7 @@ const prefixes = {
   yandex: "yandexmail://",
   fastmail: "fastmail://",
   protonmail: "protonmail://",
+  seznamemail: "szn-email://"
 };
 
 const titles = {
@@ -27,6 +28,7 @@ const titles = {
   yandex: "Yandex",
   fastmail: "Fastmail",
   protonmail: "ProtonMail",
+  seznamemail: "Email.cz",
 };
 
 /**
@@ -116,6 +118,9 @@ const uriParams = {
   protonmail: {
     path: "compose",
   },
+  seznamemail: {
+    path: "mail"
+  }
 };
 
 /**
@@ -159,10 +164,10 @@ export function isAppInstalled(app) {
     }
 
     Linking.canOpenURL(prefixes[app])
-      .then((isSupported) => {
-        resolve(isSupported);
-      })
-      .catch(() => resolve(false));
+        .then((isSupported) => {
+          resolve(isSupported);
+        })
+        .catch(() => resolve(false));
   });
 }
 
@@ -175,11 +180,11 @@ export function isAppInstalled(app) {
  * @returns {Promise<String|null>}
  */
 export function askAppChoice(
-  title = "Open mail app",
-  message = "Which app would you like to open?",
-  cancelLabel = "Cancel",
-  removeText = false,
-  actionType = "open"
+    title = "Open mail app",
+    message = "Which app would you like to open?",
+    cancelLabel = "Cancel",
+    removeText = false,
+    actionType = "open"
 ) {
   return new Promise(async (resolve, reject) => {
     let availableApps = [];
@@ -198,24 +203,24 @@ export function askAppChoice(
     }
 
     let options = availableApps.map((app) =>
-      actionType === "compose" && app === "apple-mail"
-        ? "Default email reader"
-        : titles[app]
+        actionType === "compose" && app === "apple-mail"
+            ? "Default email reader"
+            : titles[app]
     );
     options.push(cancelLabel);
 
     ActionSheetIOS.showActionSheetWithOptions(
-      {
-        options: options,
-        cancelButtonIndex: options.length - 1,
-        ...(removeText ? {} : { title, message }),
-      },
-      (buttonIndex) => {
-        if (buttonIndex === options.length - 1) {
-          return resolve(null);
+        {
+          options: options,
+          cancelButtonIndex: options.length - 1,
+          ...(removeText ? {} : { title, message }),
+        },
+        (buttonIndex) => {
+          if (buttonIndex === options.length - 1) {
+            return resolve(null);
+          }
+          return resolve(availableApps[buttonIndex]);
         }
-        return resolve(availableApps[buttonIndex]);
-      }
     );
   });
 }
@@ -234,12 +239,12 @@ async function getApp(options, actionType) {
   }
 
   if (
-    "app" in options &&
-    options.app &&
-    Object.keys(prefixes).indexOf(options.app) < 0
+      "app" in options &&
+      options.app &&
+      Object.keys(prefixes).indexOf(options.app) < 0
   ) {
     throw new EmailException(
-      'Option `app` should be undefined, null, or one of the following: "' +
+        'Option `app` should be undefined, null, or one of the following: "' +
         Object.keys(prefixes).join('", "') +
         '".'
     );
@@ -250,11 +255,11 @@ async function getApp(options, actionType) {
   if (!app) {
     const { title, message, cancelLabel, removeText } = options;
     app = await askAppChoice(
-      title,
-      message,
-      cancelLabel,
-      removeText,
-      actionType
+        title,
+        message,
+        cancelLabel,
+        removeText,
+        actionType
     );
   }
 

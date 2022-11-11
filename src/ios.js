@@ -13,6 +13,7 @@ const prefixes = {
   yandex: "yandexmail://",
   fastmail: "fastmail://",
   protonmail: "protonmail://",
+  seznamemail: "szn-email://",
 };
 
 const titles = {
@@ -27,6 +28,7 @@ const titles = {
   yandex: "Yandex",
   fastmail: "Fastmail",
   protonmail: "ProtonMail",
+  seznamemail: "Email.cz",
 };
 
 /**
@@ -115,6 +117,9 @@ const uriParams = {
   },
   protonmail: {
     path: "compose",
+  },
+  seznamemail: {
+    path: "mail",
   },
 };
 

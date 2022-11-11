@@ -177,6 +177,7 @@ export function isAppInstalled(app) {
  * @param message
  * @param cancelLabel
  * @param removeText
+ * @param defaultEmailLabel
  * @returns {Promise<String|null>}
  */
 export function askAppChoice(
@@ -184,6 +185,7 @@ export function askAppChoice(
   message = "Which app would you like to open?",
   cancelLabel = "Cancel",
   removeText = false,
+  defaultEmailLabel = "Default email reader",
   actionType = "open"
 ) {
   return new Promise(async (resolve, reject) => {
@@ -204,7 +206,7 @@ export function askAppChoice(
 
     let options = availableApps.map((app) =>
       actionType === "compose" && app === "apple-mail"
-        ? "Default email reader"
+        ? defaultEmailLabel
         : titles[app]
     );
     options.push(cancelLabel);
@@ -253,12 +255,13 @@ async function getApp(options, actionType) {
   let { app = null } = options;
 
   if (!app) {
-    const { title, message, cancelLabel, removeText } = options;
+    const { title, message, cancelLabel, removeText, defaultEmailLabel } = options;
     app = await askAppChoice(
       title,
       message,
       cancelLabel,
       removeText,
+      defaultEmailLabel,
       actionType
     );
   }
@@ -275,6 +278,7 @@ async function getApp(options, actionType) {
  *     message: string,
  *     cancelLabel: string,
  *     removeText: boolean
+ *     defaultEmailLabel: string
  * }} options
  */
 export async function openInbox(options = {}) {
@@ -297,6 +301,7 @@ export async function openInbox(options = {}) {
  *     message: string,
  *     cancelLabel: string,
  *     removeText: boolean,
+ *     defaultEmailLabel: string,
  *     to: string,
  *     cc: string,
  *     bcc: string,

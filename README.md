@@ -59,7 +59,6 @@ Just add this in your `Info.plist` depending on which apps you'd like to support
     <string>yandexmail</string>
     <string>fastmail</string>
     <string>protonmail</string>
-    <string>szn-email</string>
 </array>
 ```
 
@@ -99,6 +98,7 @@ openInbox();
 - [`message`](#message)
 - [`cancelLabel`](#cancelLabel)
 - [`removeText`](#removeText)
+- [`defaultEmailLabel`](#defaultEmailLabel)
 - [`newTask`](#newTask)
 
 #### `title`
@@ -132,6 +132,14 @@ If true, not text will be show above the ActionSheet or Intent. Default value is
 | Type    | Required | Default |
 | ------- | -------- | ------- |
 | boolean | No       | false   |
+
+#### `defaultEmailLabel`
+
+Text for first button of the ActionSheet.
+
+| Type   | Required | Default                | Platform |
+| ------ | -------- | ---------------------- | -------- |
+| string | No       | 'Default email reader' | iOS      |
 
 #### `newTask`
 
@@ -168,6 +176,7 @@ openComposer();
 - [`message`](#message) (iOS only)
 - [`cancelLabel`](#cancelLabel) (iOS only)
 - [`removeText`](#removeText)
+- [`defaultEmailLabel`](#defaultEmailLabel)
 - [`to`](#to)
 - [`cc`](#cc) (iOS only)
 - [`bcc`](#bcc) (iOS only)
@@ -206,6 +215,14 @@ If true, not text will be show above the ActionSheet or Intent. Default value is
 | Type    | Required | Default |
 | ------- | -------- | ------- |
 | boolean | No       | false   |
+
+#### `defaultEmailLabel`
+
+Text for first button of the ActionSheet.
+
+| Type   | Required | Default                | Platform |
+| ------ | -------- | ---------------------- | -------- |
+| string | No       | 'Default email reader' | iOS      |
 
 #### `to`
 

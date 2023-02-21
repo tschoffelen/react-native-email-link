@@ -4,6 +4,7 @@ export interface InboxOptions {
   message?: string;
   cancelLabel?: string;
   removeText?: boolean;
+  defaultEmailLabel?: string;
 }
 
 export interface ComposeOptions extends InboxOptions {
@@ -20,6 +21,7 @@ export function openInbox({
   message,
   cancelLabel,
   removeText,
+  defaultEmailLabel
 }?: InboxOptions): Promise<{ app: string; title: string } | null>;
 
 export function openComposer({
@@ -33,6 +35,7 @@ export function openComposer({
   bcc,
   subject,
   body,
+  defaultEmailLabel
 }?: ComposeOptions): Promise<{ app: string; title: string } | null>;
 
 export class EmailException {

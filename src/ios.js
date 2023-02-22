@@ -255,8 +255,13 @@ async function getApp(options, actionType) {
   let { app = null } = options;
 
   if (!app) {
-    const { title, message, cancelLabel, removeText, defaultEmailLabel } =
-      options;
+    const {
+      title,
+      message,
+      cancelLabel,
+      removeText,
+      defaultEmailLabel,
+    } = options;
     app = await askAppChoice(
       title,
       message,

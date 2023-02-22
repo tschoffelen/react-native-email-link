@@ -21,7 +21,7 @@ export function openInbox({
   message,
   cancelLabel,
   removeText,
-  defaultEmailLabel
+  defaultEmailLabel,
 }?: InboxOptions): Promise<{ app: string; title: string } | null>;
 
 export function openComposer({
@@ -35,7 +35,7 @@ export function openComposer({
   bcc,
   subject,
   body,
-  defaultEmailLabel
+  defaultEmailLabel,
 }?: ComposeOptions): Promise<{ app: string; title: string } | null>;
 
 export class EmailException {

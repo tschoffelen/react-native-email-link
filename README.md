@@ -48,6 +48,7 @@ Just add this in your `Info.plist` depending on which apps you'd like to support
 ```xml
 <key>LSApplicationQueriesSchemes</key>
 <array>
+    <string>mailto</string>
     <string>message</string>
     <string>readdle-spark</string>
     <string>airmail</string>

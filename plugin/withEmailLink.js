@@ -27,6 +27,7 @@ const withLSApplicationQueriesSchemes = (config, schemes) => {
  */
 const withEmailLink = (config) => {
   config = withLSApplicationQueriesSchemes(config, [
+    "mailto",
     "message",
     "readdle-spark",
     "airmail",

@@ -69,7 +69,7 @@ public class EmailModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void compose(final String title, final String to, final String subject, final String body) {
+    public void compose(final String title, final String to, final String subject, final String body, final String cc, final String bcc) {
         Intent send = new Intent(Intent.ACTION_SENDTO);
         String uriText = "mailto:" + Uri.encode(to) +
                 "?subject=" + Uri.encode(subject) +
@@ -79,6 +79,12 @@ public class EmailModule extends ReactContextBaseJavaModule {
         send.setData(uri);
         Intent chooserIntent = Intent.createChooser(send, title);
         chooserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if(cc != null) {
+            chooserIntent.putExtra(Intent.EXTRA_CC, cc.split(","));
+        }
+        if(bcc != null) {
+            chooserIntent.putExtra(Intent.EXTRA_BCC, bcc.split(","));
+        }
         getReactApplicationContext().startActivity(chooserIntent);
     }
 

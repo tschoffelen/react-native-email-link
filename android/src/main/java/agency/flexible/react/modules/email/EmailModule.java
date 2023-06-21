@@ -75,10 +75,10 @@ public class EmailModule extends ReactContextBaseJavaModule {
                 "?subject=" + Uri.encode(subject) +
                 "&body=" + Uri.encode(body);
         if(cc != null) {
-            uriText += "&cc=" + cc;
+            uriText += "&cc=" + Uri.encode(cc);
         }
         if(bcc != null) {
-            uriText += "&bcc=" + bcc;
+            uriText += "&bcc=" + Uri.encode(bcc);
         }
         Uri uri = Uri.parse(uriText);
 

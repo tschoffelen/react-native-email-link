@@ -44,6 +44,8 @@ export async function openInbox(options = {}) {
  *     title: string,
  *     removeText: boolean,
  *     to: string,
+ *     cc: string,
+ *     bcc: string,
  *     subject: string,
  *     body: string,
  *     encodeBody: boolean
@@ -64,6 +66,8 @@ export async function openComposer(options = {}) {
     text,
     options.to,
     options.subject || "",
-    body
+    body,
+    options.cc,
+    options.bcc
   );
 }

@@ -180,8 +180,8 @@ openComposer();
 - [`removeText`](#removeText)
 - [`defaultEmailLabel`](#defaultEmailLabel)
 - [`to`](#to)
-- [`cc`](#cc) (iOS only)
-- [`bcc`](#bcc) (iOS only)
+- [`cc`](#cc)
+- [`bcc`](#bcc)
 - [`subject`](#subject)
 - [`body`](#body)
 - [`encodeBody`](#encodeBody)
@@ -236,7 +236,7 @@ Recipient's email address.
 
 #### `cc`
 
-Email's cc (iOS only).
+Email's cc.
 
 | Type   | Required | Default |
 | ------ | -------- | ------- |
@@ -244,7 +244,7 @@ Email's cc (iOS only).
 
 #### `bcc`
 
-Email's bcc (iOS only).
+Email's bcc.
 
 | Type   | Required | Default |
 | ------ | -------- | ------- |

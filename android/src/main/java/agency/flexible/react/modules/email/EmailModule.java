@@ -69,11 +69,17 @@ public class EmailModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void compose(final String title, final String to, final String subject, final String body) {
+    public void compose(final String title, final String to, final String subject, final String body, final String cc, final String bcc) {
         Intent send = new Intent(Intent.ACTION_SENDTO);
         String uriText = "mailto:" + Uri.encode(to) +
                 "?subject=" + Uri.encode(subject) +
                 "&body=" + Uri.encode(body);
+        if(cc != null) {
+            uriText += "&cc=" + Uri.encode(cc);
+        }
+        if(bcc != null) {
+            uriText += "&bcc=" + Uri.encode(bcc);
+        }
         Uri uri = Uri.parse(uriText);
 
         send.setData(uri);

@@ -314,6 +314,7 @@ export async function openInbox(options = {}) {
  *     subject: string,
  *     body: string,
  *     encodeBody: boolean
+ *     encodeSubject: boolean
  * }} options
  */
 export async function openComposer(options) {
@@ -325,6 +326,10 @@ export async function openComposer(options) {
 
   if (options.encodeBody) {
     options.body = encodeURIComponent(options.body);
+  }
+
+  if (options.encodeSubject) {
+    options.subject = encodeURIComponent(options.subject);
   }
 
   const params = getUrlParams(app, options);

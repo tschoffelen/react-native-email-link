@@ -185,6 +185,7 @@ openComposer();
 - [`subject`](#subject)
 - [`body`](#body)
 - [`encodeBody`](#encodeBody)
+- [`encodeSubject`](#encodeSubject)
 
 #### `title`
 
@@ -269,6 +270,14 @@ Email's body.
 #### `encodeBody`
 
 Apply `encodeURIComponent` to the email's body.
+
+| Type    | Required | Default |
+| ------- | -------- | ------- |
+| boolean | No       | false   |
+
+#### `encodeSubject`
+
+Apply `encodeURIComponent` to the email's subject.
 
 | Type    | Required | Default |
 | ------- | -------- | ------- |

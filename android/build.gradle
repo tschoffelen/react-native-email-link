@@ -36,7 +36,14 @@ buildscript {
     }
 }
 
+def isNewArchitectureEnabled() {
+    return project.hasProperty("newArchEnabled") && project.newArchEnabled == "true"
+}
+
 apply plugin: 'com.android.library'
+if (isNewArchitectureEnabled()) {
+    apply plugin: 'com.facebook.react'
+}
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -46,11 +53,22 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode computeVersionCode()
         versionName computeVersionName()
+        buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
     }
 
     lintOptions {
         abortOnError false
         disable 'InvalidPackage'
+    }
+
+    sourceSets {
+        main {
+            if (isNewArchitectureEnabled()) {
+                java.srcDirs += ['src/newarch']
+            } else {
+                java.srcDirs += ['src/oldarch']
+            }
+        }
     }
 }
 

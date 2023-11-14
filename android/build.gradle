@@ -42,6 +42,9 @@ android {
     def agpVersion = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION
     if (agpVersion.tokenize('.')[0].toInteger() >= 7) {
       namespace 'agency.flexible.react.modules.email'
+      buildFeatures {
+         buildConfig true
+      }
     }
     compileSdkVersion rootProject.ext.compileSdkVersion
 

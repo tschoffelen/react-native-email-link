@@ -1,5 +1,6 @@
 package agency.flexible.react.modules.email;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.LabeledIntent;
 import android.content.pm.PackageManager;
@@ -16,21 +17,24 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-public class EmailModule extends ReactContextBaseJavaModule {
+public class EmailImpl {
 
-    public EmailModule(ReactApplicationContext reactContext) {
-        super(reactContext);
+    public static final String NAME = "Email";
+
+    static ReactApplicationContext RCTContext = null;
+
+    public EmailImpl(ReactApplicationContext reactContext) {
+        RCTContext = reactContext;
     }
 
-    @Override
-    public String getName() {
-        return "Email";
-    }
-
-    @ReactMethod
     public void open(final String title, final boolean newTask, final Promise promise) {
+        Activity activity = RCTContext.getCurrentActivity();
+        if (activity == null) {
+            promise.reject("No Activity", "Something went wrong");
+            return;
+        }
         Intent emailIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:"));
-        PackageManager pm = getCurrentActivity().getPackageManager();
+        PackageManager pm = RCTContext.getPackageManager();
 
         List<ResolveInfo> resInfo = pm.queryIntentActivities(emailIntent, 0);
         if (resInfo.size() > 0) {
@@ -59,7 +63,7 @@ public class EmailModule extends ReactContextBaseJavaModule {
                 // Add the rest of the email apps to the picker selection
                 openInChooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, extraIntents);
                 setNewTaskFlag(openInChooser, newTask);
-                getCurrentActivity().startActivity(openInChooser);
+                activity.startActivity(openInChooser);
             }
 
             promise.resolve(true);
@@ -68,8 +72,11 @@ public class EmailModule extends ReactContextBaseJavaModule {
         }
     }
 
-    @ReactMethod
     public void compose(final String title, final String to, final String subject, final String body, final String cc, final String bcc) {
+        Activity activity = RCTContext.getCurrentActivity();
+        if (activity == null) {
+            return;
+        }
         Intent send = new Intent(Intent.ACTION_SENDTO);
         String uriText = "mailto:" + Uri.encode(to) +
                 "?subject=" + Uri.encode(subject) +
@@ -85,12 +92,12 @@ public class EmailModule extends ReactContextBaseJavaModule {
         send.setData(uri);
         Intent chooserIntent = Intent.createChooser(send, title);
         chooserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        getReactApplicationContext().startActivity(chooserIntent);
+        activity.startActivity(chooserIntent);
     }
 
     @Nullable
     private Intent createLaunchIntent(final ResolveInfo resolveInfo, final boolean newTask) {
-        PackageManager packageManager = getCurrentActivity().getPackageManager();
+        PackageManager packageManager = RCTContext.getPackageManager();
         Intent launchIntent = packageManager.getLaunchIntentForPackage(resolveInfo.activityInfo.packageName);
         if (launchIntent != null) {
             // getLaunchIntentForPackage internally adds the FLAG_ACTIVITY_NEW_TASK.

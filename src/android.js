@@ -1,5 +1,5 @@
-import { NativeModules } from "react-native";
 import { EmailException } from "./email-exception";
+import NativeEmail from './NativeEmail';
 
 /**
  * Open an email app, or let the user choose what app to open.
@@ -12,13 +12,6 @@ import { EmailException } from "./email-exception";
  * }} options
  */
 export async function openInbox(options = {}) {
-  // We can't pre-choose, since we use native intents
-  if (!("Email" in NativeModules)) {
-    throw new EmailException(
-      "NativeModules.Email does not exist. Check if you installed the Android dependencies correctly."
-    );
-  }
-
   let text = options.removeText
     ? ""
     : options.title || "What app would you like to open?";
@@ -29,7 +22,7 @@ export async function openInbox(options = {}) {
   }
 
   try {
-    await NativeModules.Email.open(text, newTask);
+    await NativeEmail.open(text, newTask);
   } catch (error) {
     if (error.code === "NoEmailAppsAvailable") {
       throw new EmailException("No email apps available");
@@ -62,7 +55,7 @@ export async function openComposer(options = {}) {
     body = encodeURIComponent(body);
   }
 
-  return NativeModules.Email.compose(
+  return NativeEmail.compose(
     text,
     options.to,
     options.subject || "",

@@ -34,5 +34,13 @@
   },
   "devDependencies": {
     "prettier": "^2.2.1"
+  },
+  "codegenConfig": {
+    "name": "EmailSpec",
+    "type": "modules",
+    "jsSrcsDir": "src",
+    "android": {
+      "javaPackageName": "agency.flexible.react.modules.email"
+    }
   }
 }

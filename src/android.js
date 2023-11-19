@@ -49,10 +49,12 @@ export async function openInbox(options = {}) {
  *     subject: string,
  *     body: string,
  *     encodeBody: boolean
+ *     encodeSubject: boolean
  * }} options
  */
 export async function openComposer(options = {}) {
   let body = options.body || "";
+  let subject = options.subject || "";
   let text = options.title || "What app would you like to open?";
   if (options.removeText) {
     text = "";
@@ -62,10 +64,14 @@ export async function openComposer(options = {}) {
     body = encodeURIComponent(body);
   }
 
+  if (options.encodeSubject) {
+    subject = encodeURIComponent(subject);
+  }
+
   return NativeModules.Email.compose(
     text,
     options.to,
-    options.subject || "",
+    subject,
     body,
     options.cc,
     options.bcc

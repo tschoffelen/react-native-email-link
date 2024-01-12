@@ -4,7 +4,7 @@
  * This file supports both iOS and Android.
  */
 
-import { openInbox, openComposer } from "./src/ios";
+import { openInbox, openComposer, getEmailClients } from "./src/ios";
 import { EmailException } from "./src/email-exception";
 
-export { EmailException, openInbox, openComposer };
+export { EmailException, openInbox, openComposer, getEmailClients };

@@ -15,6 +15,8 @@ export interface ComposeOptions extends InboxOptions {
   body?: string;
 }
 
+export function getEmailClients(): Promise<string[]>;
+
 export function openInbox({
   app,
   title,

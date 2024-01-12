@@ -10,6 +10,8 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.WritableArray;
+import com.facebook.react.bridge.WritableNativeArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,23 @@ public class EmailModule extends ReactContextBaseJavaModule {
     @Override
     public String getName() {
         return "Email";
+    }
+
+    @ReactMethod
+    public void getEmailClients(final Promise promise) {
+        Intent emailIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:"));
+        PackageManager pm = getCurrentActivity().getPackageManager();
+        List<ResolveInfo> resInfo = pm.queryIntentActivities(emailIntent, 0);
+        if (resInfo.size() > 0) {
+            WritableArray emailApps = new WritableNativeArray();
+            for (ResolveInfo ri : resInfo) {
+                String packageName = ri.activityInfo.packageName;
+                emailApps.pushString(packageName);
+            }
+            promise.resolve(emailApps);
+        } else {
+            promise.reject("NoEmailAppsAvailable", "No email apps available");
+        }
     }
 
     @ReactMethod
@@ -65,6 +84,34 @@ public class EmailModule extends ReactContextBaseJavaModule {
             promise.resolve(true);
         } else {
             promise.reject("NoEmailAppsAvailable", "No email apps available");
+        }
+    }
+
+    @ReactMethod
+    public void composeWith(String packageName, final String title, final String to, final String subject, final String body, final String cc, final String bcc, final Promise promise) {
+        Intent launchIntent = new Intent(Intent.ACTION_SENDTO);
+        launchIntent.setPackage(packageName);
+
+        String uriText = "mailto:" + Uri.encode(to) +
+                "?subject=" + Uri.encode(subject) +
+                "&body=" + Uri.encode(body);
+        if(cc != null) {
+            uriText += "&cc=" + Uri.encode(cc);
+        }
+        if(bcc != null) {
+            uriText += "&bcc=" + Uri.encode(bcc);
+        }
+
+        Uri uri = Uri.parse(uriText);
+
+        launchIntent.setData(uri);
+        launchIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        if (launchIntent.resolveActivity(getCurrentActivity().getPackageManager()) != null) {
+            getCurrentActivity().startActivity(launchIntent);
+            promise.resolve("Success");
+        } else {
+            promise.reject("AppNotFound", "Application not found");
         }
     }
 

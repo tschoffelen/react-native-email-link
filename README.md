@@ -189,7 +189,7 @@ openComposer();
 
 #### `app`
 
-App to open the composer in
+App to open the composer with
 
 | Type   | Required | Example         |
 | ------ | -------- | --------------- |

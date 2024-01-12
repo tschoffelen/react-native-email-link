@@ -174,6 +174,7 @@ openComposer();
 
 #### Arguments
 
+- [`app`](#app)
 - [`title`](#title)
 - [`message`](#message) (iOS only)
 - [`cancelLabel`](#cancelLabel) (iOS only)
@@ -185,6 +186,15 @@ openComposer();
 - [`subject`](#subject)
 - [`body`](#body)
 - [`encodeBody`](#encodeBody)
+
+#### `app`
+
+App to open the composer in
+
+| Type   | Required | Example         |
+| ------ | -------- | --------------- |
+| string | No       | Android - package name, e.g. `com.mail.app` |
+|        |          | iOS - app slug, e.g. `gmail` |
 
 #### `title`
 
@@ -286,6 +296,23 @@ openComposer({
 });
 ```
 
+### getEmailClients
+
+```javascript
+import { getEmailClients } from "react-native-email-link";
+
+const clients = await getEmailClients();
+
+console.log(clients)
+[
+  {
+    app: 'gmail', // iOS only
+    prefix: 'gmail://',
+    title: 'GMail',
+    packageName: '' // Android only
+  }
+]
+```
 ---
 
 <div align="center">

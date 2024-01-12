@@ -279,7 +279,7 @@ async function getApp(options, actionType) {
  * Get available email clients
  * iOS -> returns a list of app names, e.g. ['apple-mail', 'gmail', 'outlook']
  * Android -> returns a list of app package names, e.g. ['com.google.android.gm', 'com.microsoft.office.outlook']
- * @returns {Promise<string[]>}
+ * @returns {Promise<{}[]>}
  */
 export function getEmailClients() {
   return new Promise(async (resolve, reject) => {
@@ -295,7 +295,24 @@ export function getEmailClients() {
       return reject(new EmailException("No email apps available"));
     }
 
-    return resolve(availableApps);
+    const apps = availableApps.reduce((acc, app) => {
+      const title = titles[app] || "";
+
+      if (title) {
+        acc.push({
+          packageName: "", // Android only
+          title,
+          prefix: prefixes[app], // iOS only
+          app, // iOS only
+        });
+
+        return acc;
+      }
+
+      return acc;
+    }, []);
+
+    return resolve(apps);
   });
 }
 
@@ -325,7 +342,7 @@ export async function openInbox(options = {}) {
 /**
  * Open an email app on the compose screen, or let the user choose what app to open on the compose screen.
  * Android - app should be a package name, e.g. 'com.google.android.gm' (use getEmailClients() to get a list of available clients)
- * iOS - app should be an app name, e.g. 'gmail' (use getEmailClients() to get a list of available clients)
+ * iOS - app should be an app name, e.g. 'gmail' (use getEmailClients() to get a list of available clients - `app`)
  *
  * @param {{
  *     app: string | undefined | null,

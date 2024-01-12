@@ -1,11 +1,24 @@
 import { NativeModules } from "react-native";
 import { EmailException } from "./email-exception";
 
+const titles = {
+  "com.google.android.gm": "Gmail",
+  "com.readdle.spark": "Spark",
+  "com.gemini.airmail": "AirMail",
+  "com.microsoft.office.outlook": "Outlook",
+  "com.yahoo.mobile.client.android.mail": "Yahoo Mail",
+  "com.superhuman.mail": "Superhuman",
+  "ru.yandex.mail": "Yandex Mail",
+  "com.fastmail.app": "Fastmail",
+  "ch.protonmail.android": "ProtonMail",
+  "cz.seznam.email": "Seznam Email",
+};
+
 /**
  * Get available email clients
  * iOS -> returns a list of app names, e.g. ['apple-mail', 'gmail', 'outlook']
  * Android -> returns a list of app package names, e.g. ['com.google.android.gm', 'com.microsoft.office.outlook']
- * @returns {Promise<string[]>}
+ * @returns {Promise<{}[]>}
  */
 export async function getEmailClients() {
   if (!("Email" in NativeModules)) {
@@ -15,7 +28,24 @@ export async function getEmailClients() {
   }
 
   try {
-    return NativeModules.Email.getEmailClients();
+    const clientsPackageNames = await NativeModules.Email.getEmailClients();
+
+    return clientsPackageNames.reduce((acc, packageName) => {
+      const title = titles[packageName] || "";
+
+      if (title) {
+        acc.push({
+          packageName, // Android only
+          title,
+          prefix: "", // iOS only
+          app: "", // iOS only
+        });
+
+        return acc;
+      }
+
+      return acc;
+    }, []);
   } catch (error) {
     if (error.code === "NoEmailAppsAvailable") {
       throw new EmailException("No email apps available");
@@ -62,7 +92,7 @@ export async function openInbox(options = {}) {
 /**
  * Open an email app on the compose screen, or let the user choose what app to open on the compose screen.
  * Android - app should be a package name, e.g. 'com.google.android.gm' (use getEmailClients() to get a list of available clients)
- * iOS - app should be an app name, e.g. 'gmail' (use getEmailClients() to get a list of available clients)
+ * iOS - app should be an app name, e.g. 'gmail' (use getEmailClients() to get a list of available clients - `app`)
  *
  * @param {{
  *     title: string,

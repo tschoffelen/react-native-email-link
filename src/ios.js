@@ -277,9 +277,13 @@ async function getApp(options, actionType) {
 
 /**
  * Get available email clients
- * iOS -> returns a list of app names, e.g. ['apple-mail', 'gmail', 'outlook']
- * Android -> returns a list of app package names, e.g. ['com.google.android.gm', 'com.microsoft.office.outlook']
- * @returns {Promise<{}[]>}
+ *
+ * @returns {Promise<{
+ *   packageName: string;
+ *   title: string;
+ *   prefix: string;
+ *   app: string;
+ * }[]>}
  */
 export function getEmailClients() {
   return new Promise(async (resolve, reject) => {

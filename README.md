@@ -193,8 +193,9 @@ App to open the composer with
 
 | Type   | Required | Example         |
 | ------ | -------- | --------------- |
-| string | No       | Android - package name, e.g. `com.mail.app` |
-|        |          | iOS - app slug, e.g. `gmail` |
+| string | No       | An app's `id` that can be retrieved with `getEmailClients` |
+|        |          | On Android - `id` holds the package name, e.g. `com.mail.app` |
+|        |          | On iOS - `id` holds the app slug/name, e.g. `gmail` |
 
 #### `title`
 

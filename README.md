@@ -310,7 +310,7 @@ console.log(clients)
     iOSAppName: 'gmail', // iOS only
     prefix: 'gmail://',
     title: 'GMail',
-    androidPackagename: 'com.google.android.gm' // Android only
+    androidPackagename: 'com.google.android.gm', // Android only
     id: 'gmail' // depending on the platform, holds either the package name or the app slug value
   }
 ]

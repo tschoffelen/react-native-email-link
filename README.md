@@ -304,15 +304,20 @@ import { getEmailClients } from "react-native-email-link";
 const clients = await getEmailClients();
 
 console.log(clients)
+
 [
   {
-    app: 'gmail', // iOS only
+    iOSAppName: 'gmail', // iOS only
     prefix: 'gmail://',
     title: 'GMail',
-    packageName: '' // Android only
+    androidPackagename: 'com.google.android.gm' // Android only
+    id: 'gmail' // depending on the platform, holds either the package name or the app slug value
   }
 ]
 ```
+
+> If you want to use this method to present, say, clients picker within a custom UI and then use the `openComposer`, simply pass `id` value in the options (`options.app`)
+
 ---
 
 <div align="center">

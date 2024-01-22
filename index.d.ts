@@ -17,10 +17,11 @@ export interface ComposeOptions extends InboxOptions {
 
 export function getEmailClients(): Promise<
   {
-    packageName: string;
+    androidPackageName: string;
     title: string;
     prefix: string;
-    app: string;
+    iOSAppName: string;
+    id: string;
   }[]
 >;
 

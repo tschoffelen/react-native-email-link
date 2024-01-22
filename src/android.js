@@ -18,10 +18,11 @@ const titles = {
  * Get available email clients
  *
  * @returns {Promise<{
- *   packageName: string;
+ *   androidPackageName: string;
  *   title: string;
  *   prefix: string;
- *   app: string;
+ *   iOSAppName: string;
+ *   id: string;
  * }[]>}
  */
 export async function getEmailClients() {
@@ -39,10 +40,11 @@ export async function getEmailClients() {
 
       if (title) {
         acc.push({
-          packageName, // Android only
+          androidPackageName: packageName, // Android only
           title,
           prefix: "", // iOS only
-          app: "", // iOS only
+          iOSAppName: "", // iOS only
+          id: packageName,
         });
 
         return acc;

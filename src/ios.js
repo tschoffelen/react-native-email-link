@@ -279,10 +279,11 @@ async function getApp(options, actionType) {
  * Get available email clients
  *
  * @returns {Promise<{
- *   packageName: string;
+ *   androidPackageName: string;
  *   title: string;
  *   prefix: string;
- *   app: string;
+ *   iOSAppName: string;
+ *   id: string;
  * }[]>}
  */
 export function getEmailClients() {
@@ -304,10 +305,11 @@ export function getEmailClients() {
 
       if (title) {
         acc.push({
-          packageName: "", // Android only
+          androidPackageName: "", // Android only
           title,
           prefix: prefixes[app], // iOS only
-          app, // iOS only
+          iOSAppName: app, // iOS only
+          id: app,
         });
 
         return acc;

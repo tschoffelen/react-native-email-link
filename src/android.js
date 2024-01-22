@@ -97,10 +97,10 @@ export async function openInbox(options = {}) {
 
 /**
  * Open an email app on the compose screen, or let the user choose what app to open on the compose screen.
- * Android - app should be a package name, e.g. 'com.google.android.gm' (use getEmailClients() to get a list of available clients)
- * iOS - app should be an app name, e.g. 'gmail' (use getEmailClients() to get a list of available clients - `app`)
+ * You can pass `id` to open a specific app, or `null` to let the user choose. (`id` can be retrieved with `getEmailClients`
  *
  * @param {{
+ *     app: string | undefined | null,
  *     title: string,
  *     removeText: boolean,
  *     to: string,

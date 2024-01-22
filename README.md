@@ -316,7 +316,7 @@ console.log(clients)
 ]
 ```
 
-> If you want to use this method to present, say, clients picker within a custom UI and then use the `openComposer`, simply pass `id` value in the options (`options.app`)
+If you want to use this method to present, say, an email clients picker within a custom UI and then use the `openComposer` to open a certain app, simply pass `id` value in the options (`options.app`) in the `openComposer`.
 
 ---
 

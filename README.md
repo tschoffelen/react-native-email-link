@@ -316,7 +316,7 @@ console.log(clients)
 ]
 ```
 
-If you want to use this method to present, say, an email clients picker within a custom UI and then use the `openComposer` to open a certain app, simply pass `id` value in the options (`options.app`) in the `openComposer`.
+To utilize this feature to display an email client picker within a custom UI and subsequently use the `openComposer` to launch a specific app, you just need to pass the `id` (from response) value into the options (`options.app`) within the `openComposer`.
 
 ---
 

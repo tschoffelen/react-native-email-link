@@ -191,11 +191,11 @@ openComposer();
 
 App to open the composer with
 
-| Type   | Required | Example         |
-| ------ | -------- | --------------- |
-| string | No       | An app's `id` that can be retrieved with `getEmailClients` |
+| Type   | Required | Example                                                       |
+| ------ | -------- | ------------------------------------------------------------- |
+| string | No       | An app's `id` that can be retrieved with `getEmailClients`    |
 |        |          | On Android - `id` holds the package name, e.g. `com.mail.app` |
-|        |          | On iOS - `id` holds the app slug/name, e.g. `gmail` |
+|        |          | On iOS - `id` holds the app slug/name, e.g. `gmail`           |
 
 #### `title`
 
@@ -304,17 +304,15 @@ import { getEmailClients } from "react-native-email-link";
 
 const clients = await getEmailClients();
 
-console.log(clients)
-
-[
+console.log(clients)[
   {
-    iOSAppName: 'gmail', // iOS only
-    prefix: 'gmail://',
-    title: 'GMail',
-    androidPackagename: 'com.google.android.gm', // Android only
-    id: 'gmail' // depending on the platform, holds either the package name or the app slug value
+    iOSAppName: "gmail", // iOS only
+    prefix: "gmail://",
+    title: "GMail",
+    androidPackagename: "com.google.android.gm", // Android only
+    id: "gmail", // depending on the platform, holds either the package name or the app slug value
   }
-]
+];
 ```
 
 To utilize this feature to display an email client picker within a custom UI and subsequently use the `openComposer` to launch a specific app, you just need to pass the `id` (from response) value into the options (`options.app`) within the `openComposer`.

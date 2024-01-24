@@ -276,6 +276,53 @@ async function getApp(options, actionType) {
 }
 
 /**
+ * Get available email clients
+ *
+ * @returns {Promise<{
+ *   androidPackageName: string;
+ *   title: string;
+ *   prefix: string;
+ *   iOSAppName: string;
+ *   id: string;
+ * }[]>}
+ */
+export function getEmailClients() {
+  return new Promise(async (resolve, reject) => {
+    let availableApps = [];
+    for (let app in prefixes) {
+      let avail = await isAppInstalled(app);
+      if (avail) {
+        availableApps.push(app);
+      }
+    }
+
+    if (availableApps.length === 0) {
+      return reject(new EmailException("No email apps available"));
+    }
+
+    const apps = availableApps.reduce((acc, app) => {
+      const title = titles[app] || "";
+
+      if (title) {
+        acc.push({
+          androidPackageName: "", // Android only
+          title,
+          prefix: prefixes[app], // iOS only
+          iOSAppName: app, // iOS only
+          id: app,
+        });
+
+        return acc;
+      }
+
+      return acc;
+    }, []);
+
+    return resolve(apps);
+  });
+}
+
+/**
  * Open an email app, or let the user choose what app to open.
  *
  * @param {{
@@ -300,6 +347,7 @@ export async function openInbox(options = {}) {
 
 /**
  * Open an email app on the compose screen, or let the user choose what app to open on the compose screen.
+ * You can pass `id` to open a specific app, or `null` to let the user choose. (`id` can be retrieved with `getEmailClients`
  *
  * @param {{
  *     app: string | undefined | null,

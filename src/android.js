@@ -1,6 +1,64 @@
 import { NativeModules } from "react-native";
 import { EmailException } from "./email-exception";
 
+const titles = {
+  "com.google.android.gm": "Gmail",
+  "com.readdle.spark": "Spark",
+  "com.gemini.airmail": "AirMail",
+  "com.microsoft.office.outlook": "Outlook",
+  "com.yahoo.mobile.client.android.mail": "Yahoo Mail",
+  "com.superhuman.mail": "Superhuman",
+  "ru.yandex.mail": "Yandex Mail",
+  "com.fastmail.app": "Fastmail",
+  "ch.protonmail.android": "ProtonMail",
+  "cz.seznam.email": "Seznam Email",
+};
+
+/**
+ * Get available email clients
+ *
+ * @returns {Promise<{
+ *   androidPackageName: string;
+ *   title: string;
+ *   prefix: string;
+ *   iOSAppName: string;
+ *   id: string;
+ * }[]>}
+ */
+export async function getEmailClients() {
+  if (!("Email" in NativeModules)) {
+    throw new EmailException(
+      "NativeModules.Email does not exist. Check if you installed the Android dependencies correctly."
+    );
+  }
+
+  try {
+    const clientsPackageNames = await NativeModules.Email.getEmailClients();
+
+    return clientsPackageNames.reduce((acc, packageName) => {
+      const title = titles[packageName] || "";
+
+      if (title) {
+        acc.push({
+          androidPackageName: packageName, // Android only
+          title,
+          prefix: "", // iOS only
+          iOSAppName: "", // iOS only
+          id: packageName,
+        });
+
+        return acc;
+      }
+
+      return acc;
+    }, []);
+  } catch (error) {
+    if (error.code === "NoEmailAppsAvailable") {
+      throw new EmailException("No email apps available");
+    }
+  }
+}
+
 /**
  * Open an email app, or let the user choose what app to open.
  *
@@ -39,8 +97,10 @@ export async function openInbox(options = {}) {
 
 /**
  * Open an email app on the compose screen, or let the user choose what app to open on the compose screen.
+ * You can pass `id` to open a specific app, or `null` to let the user choose. (`id` can be retrieved with `getEmailClients`
  *
  * @param {{
+ *     app: string | undefined | null,
  *     title: string,
  *     removeText: boolean,
  *     to: string,
@@ -60,6 +120,18 @@ export async function openComposer(options = {}) {
 
   if (options.encodeBody) {
     body = encodeURIComponent(body);
+  }
+
+  if (options.app) {
+    return NativeModules.Email.composeWith(
+      options.app,
+      text,
+      options.to,
+      options.subject || "",
+      body,
+      options.cc,
+      options.bcc
+    );
   }
 
   return NativeModules.Email.compose(

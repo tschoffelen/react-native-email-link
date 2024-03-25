@@ -6,7 +6,7 @@
   "main": "index",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/flexible-agency/react-native-email-link.git"
+    "url": "git+https://github.com/includable/react-native-email-link.git"
   },
   "scripts": {
     "lint:fix": "prettier --write .",
@@ -22,17 +22,17 @@
     "ios",
     "android"
   ],
-  "author": "Thomas Schoffelen <thomas@flexible.agency> (https://flexible.agency/)",
+  "author": "Thomas Schoffelen <thomas@includable.com> (https://includable.com/)",
   "license": "MIT",
-  "homepage": "https://github.com/flexible-agency/react-native-email-link#readme",
+  "homepage": "https://github.com/includable/react-native-email-link#readme",
   "bugs": {
-    "url": "https://github.com/flexible-agency/react-native-email-link/issues"
+    "url": "https://github.com/includable/react-native-email-link/issues"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-native": ">=0.40.0"
   },
   "devDependencies": {
-    "prettier": "^2.2.1"
+    "prettier": "^3.2.5"
   }
 }

@@ -13,6 +13,7 @@ export interface ComposeOptions extends InboxOptions {
   bcc?: string;
   subject?: string;
   body?: string;
+  encodeBody?: boolean;
 }
 
 export function getEmailClients(): Promise<
@@ -46,6 +47,7 @@ export function openComposer({
   subject,
   body,
   defaultEmailLabel,
+  encodeBody,
 }?: ComposeOptions): Promise<{ app: string; title: string } | null>;
 
 export class EmailException {

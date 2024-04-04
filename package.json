@@ -10,7 +10,8 @@
   },
   "scripts": {
     "lint:fix": "prettier --write .",
-    "lint": "prettier --check ."
+    "lint": "prettier --check .",
+    "release": "semantic-release"
   },
   "keywords": [
     "react-native",
@@ -33,6 +34,7 @@
     "react-native": ">=0.40.0"
   },
   "devDependencies": {
-    "prettier": "^3.2.5"
+    "prettier": "^3.2.5",
+    "semantic-release": "^23.0.7"
   }
 }

@@ -28,9 +28,6 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile
 
-      - name: Build
-        run: yarn build
-
       - name: Install latest npm
         run: npm install -g npm@latest
 

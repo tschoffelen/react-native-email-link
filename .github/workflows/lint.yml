@@ -3,7 +3,7 @@ name: Linting
 on: [push]
 
 jobs:
-  eslint:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code

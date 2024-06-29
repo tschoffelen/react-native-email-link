@@ -186,7 +186,7 @@ export function askAppChoice(
   cancelLabel = "Cancel",
   removeText = false,
   defaultEmailLabel = "Default email reader",
-  actionType = "open"
+  actionType = "open",
 ) {
   return new Promise(async (resolve, reject) => {
     let availableApps = [];
@@ -207,7 +207,7 @@ export function askAppChoice(
     let options = availableApps.map((app) =>
       actionType === "compose" && app === "apple-mail"
         ? defaultEmailLabel
-        : titles[app]
+        : titles[app],
     );
     options.push(cancelLabel);
 
@@ -222,7 +222,7 @@ export function askAppChoice(
           return resolve(null);
         }
         return resolve(availableApps[buttonIndex]);
-      }
+      },
     );
   });
 }
@@ -248,27 +248,22 @@ async function getApp(options, actionType) {
     throw new EmailException(
       'Option `app` should be undefined, null, or one of the following: "' +
         Object.keys(prefixes).join('", "') +
-        '".'
+        '".',
     );
   }
 
   let { app = null } = options;
 
   if (!app) {
-    const {
-      title,
-      message,
-      cancelLabel,
-      removeText,
-      defaultEmailLabel,
-    } = options;
+    const { title, message, cancelLabel, removeText, defaultEmailLabel } =
+      options;
     app = await askAppChoice(
       title,
       message,
       cancelLabel,
       removeText,
       defaultEmailLabel,
-      actionType
+      actionType,
     );
   }
 

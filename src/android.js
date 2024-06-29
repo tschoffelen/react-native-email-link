@@ -28,7 +28,7 @@ const titles = {
 export async function getEmailClients() {
   if (!("Email" in NativeModules)) {
     throw new EmailException(
-      "NativeModules.Email does not exist. Check if you installed the Android dependencies correctly."
+      "NativeModules.Email does not exist. Check if you installed the Android dependencies correctly.",
     );
   }
 
@@ -73,7 +73,7 @@ export async function openInbox(options = {}) {
   // We can't pre-choose, since we use native intents
   if (!("Email" in NativeModules)) {
     throw new EmailException(
-      "NativeModules.Email does not exist. Check if you installed the Android dependencies correctly."
+      "NativeModules.Email does not exist. Check if you installed the Android dependencies correctly.",
     );
   }
 
@@ -130,7 +130,7 @@ export async function openComposer(options = {}) {
       options.subject || "",
       body,
       options.cc,
-      options.bcc
+      options.bcc,
     );
   }
 
@@ -140,6 +140,6 @@ export async function openComposer(options = {}) {
     options.subject || "",
     body,
     options.cc,
-    options.bcc
+    options.bcc,
   );
 }

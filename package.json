@@ -34,7 +34,7 @@
     "react-native": ">=0.40.0"
   },
   "devDependencies": {
-    "prettier": "^3.2.5",
-    "semantic-release": "^23.0.7"
+    "prettier": "^3.3.2",
+    "semantic-release": "^23.1.1"
   }
 }

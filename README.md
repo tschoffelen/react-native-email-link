@@ -6,7 +6,7 @@
 
 ---
 
-An easy way to open an email app of the user's choice, based on the apps they have installed
+An easy way to open an email app of the user's choice, based on the mail apps they have installed
 on their device. Very helpful for magic link logins.
 
 Currently supported apps:
@@ -43,7 +43,7 @@ Based on the platforms your app supports, you also need to:
 
 To allow your app to detect if any of the mailbox apps are installed, an extra step is required on iOS. Your app needs to provide the `LSApplicationQueriesSchemes` key inside `ios/{my-project}/Info.plist` to specify the URL schemes with which the app can interact.
 
-Just add this in your `Info.plist` depending on which apps you'd like to support. Omitting these might mean that the library can't detect some of the maps apps installed by the user.
+Just add this in your `Info.plist` depending on which apps you'd like to support. Omitting these might mean that the library can't detect some of the mail apps installed by the user.
 
 ```xml
 <key>LSApplicationQueriesSchemes</key>

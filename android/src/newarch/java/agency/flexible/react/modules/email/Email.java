@@ -33,7 +33,7 @@ public class Email extends NativeEmailSpec {
 
     @Override
     public void openWith(String packageName, Promise promise) {
-        delegate.openWith(packageName, promise);
+        delegate.openWith(packageName,promise);
     }
 
     @Override
@@ -42,7 +42,12 @@ public class Email extends NativeEmailSpec {
     }
 
     @Override
-    public void compose(String title, String to, String subject, String body, String cc, String bcc) {
-        delegate.compose(title,to,subject,body,cc,bcc);
+    public void compose(String title, String to, String subject, String body, String cc, String bcc, Promise promise) {
+        delegate.compose(title,to,subject,body,cc,bcc,promise);
+    }
+
+    @Override
+    public void composeWith(String packageName, String title, String to, String subject, String body, String cc, String bcc, Promise promise) {
+        delegate.composeWith(packageName,title,to,subject,body,cc,bcc,promise);
     }
 }

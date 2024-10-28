@@ -106,6 +106,7 @@ public class EmailImpl {
     public void composeWith(String packageName, final String title, final String to, final String subject, final String body, final String cc, final String bcc, final Promise promise) {
         Activity activity = RCTContext.getCurrentActivity();
         if (activity == null) {
+            promise.reject("No Activity", "Something went wrong");
             return;
         }
         Intent launchIntent = new Intent(Intent.ACTION_SENDTO);
@@ -128,15 +129,16 @@ public class EmailImpl {
 
         if (launchIntent.resolveActivity(RCTContext.getPackageManager()) != null) {
             activity.startActivity(launchIntent);
-            promise.resolve("Success");
+            promise.resolve(true);
         } else {
             promise.reject("AppNotFound", "Application not found");
         }
     }
 
-    public void compose(final String title, final String to, final String subject, final String body, final String cc, final String bcc) {
+    public void compose(final String title, final String to, final String subject, final String body, final String cc, final String bcc, final Promise promise) {
         Activity activity = RCTContext.getCurrentActivity();
         if (activity == null) {
+            promise.reject("No Activity", "Something went wrong");
             return;
         }
         Intent send = new Intent(Intent.ACTION_SENDTO);
@@ -155,6 +157,7 @@ public class EmailImpl {
         Intent chooserIntent = Intent.createChooser(send, title);
         chooserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(chooserIntent);
+        promise.resolve(true)
     }
 
     @Nullable

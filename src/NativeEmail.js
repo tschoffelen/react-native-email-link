@@ -5,7 +5,8 @@ import { TurboModuleRegistry } from "react-native";
 export interface Spec extends TurboModule {
   open: (title: string, newTask: boolean) => Promise<boolean>;
   openWith: (packageName: string) => Promise<boolean>;
-  compose: (title: string, to: string, subject: string, body: string, cc: string, bcc: string) => void;
+  compose: (title: string, to: string, subject: string, body: string, cc: string, bcc: string) => Promise<boolean>;
+  composeWith: (packageName: string, title: string, to: string, subject: string, body: string, cc: string, bcc: string) => Promise<boolean>;
   getEmailClients: () => Promise<{
     androidPackageName: string;
     title: string;

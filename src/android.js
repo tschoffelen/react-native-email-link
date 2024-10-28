@@ -75,7 +75,7 @@ export async function openInbox(options = {}) {
 
   try {
     if (options.app) {
-      await NativeEmail.openWith(options.app, newTask);
+      await NativeEmail.openWith(options.app);
     } else {
       await NativeEmail.open(text, newTask);
     }

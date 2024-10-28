@@ -157,7 +157,7 @@ public class EmailImpl {
         Intent chooserIntent = Intent.createChooser(send, title);
         chooserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(chooserIntent);
-        promise.resolve(true)
+        promise.resolve(true);
     }
 
     @Nullable

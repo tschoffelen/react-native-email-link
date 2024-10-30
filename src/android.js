@@ -1,5 +1,5 @@
-import { NativeModules } from "react-native";
 import { EmailException } from "./email-exception";
+import NativeEmail from './NativeEmail';
 
 const titles = {
   "com.google.android.gm": "Gmail",
@@ -26,14 +26,8 @@ const titles = {
  * }[]>}
  */
 export async function getEmailClients() {
-  if (!("Email" in NativeModules)) {
-    throw new EmailException(
-      "NativeModules.Email does not exist. Check if you installed the Android dependencies correctly.",
-    );
-  }
-
   try {
-    const clientsPackageNames = await NativeModules.Email.getEmailClients();
+    const clientsPackageNames = await NativeEmail.getEmailClients();
 
     return clientsPackageNames.reduce((acc, packageName) => {
       const title = titles[packageName] || "";
@@ -70,13 +64,6 @@ export async function getEmailClients() {
  * }} options
  */
 export async function openInbox(options = {}) {
-  // We can't pre-choose, since we use native intents
-  if (!("Email" in NativeModules)) {
-    throw new EmailException(
-      "NativeModules.Email does not exist. Check if you installed the Android dependencies correctly.",
-    );
-  }
-
   let text = options.removeText
     ? ""
     : options.title || "What app would you like to open?";
@@ -87,7 +74,11 @@ export async function openInbox(options = {}) {
   }
 
   try {
-    await NativeModules.Email.open(text, newTask);
+    if (options.app) {
+      await NativeEmail.openWith(options.app);
+    } else {
+      await NativeEmail.open(text, newTask);
+    }
   } catch (error) {
     if (error.code === "NoEmailAppsAvailable") {
       throw new EmailException("No email apps available");
@@ -123,7 +114,7 @@ export async function openComposer(options = {}) {
   }
 
   if (options.app) {
-    return NativeModules.Email.composeWith(
+    return NativeEmail.composeWith(
       options.app,
       text,
       options.to,
@@ -134,7 +125,7 @@ export async function openComposer(options = {}) {
     );
   }
 
-  return NativeModules.Email.compose(
+  return NativeEmail.compose(
     text,
     options.to,
     options.subject || "",

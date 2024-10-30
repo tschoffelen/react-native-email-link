@@ -1,17 +1,16 @@
 {
   "name": "react-native-email-link",
-  "version": "1.15.0",
+  "version": "1.14.6",
   "versionCode": 3,
   "description": "Open the mail app of the user's choice",
   "main": "index",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/includable/react-native-email-link.git"
+    "url": "git+https://github.com/flexible-agency/react-native-email-link.git"
   },
   "scripts": {
     "lint:fix": "prettier --write .",
-    "lint": "prettier --check .",
-    "release": "semantic-release"
+    "lint": "prettier --check ."
   },
   "keywords": [
     "react-native",
@@ -23,18 +22,25 @@
     "ios",
     "android"
   ],
-  "author": "Thomas Schoffelen <thomas@includable.com> (https://includable.com/)",
+  "author": "Thomas Schoffelen <thomas@flexible.agency> (https://flexible.agency/)",
   "license": "MIT",
-  "homepage": "https://github.com/includable/react-native-email-link#readme",
+  "homepage": "https://github.com/flexible-agency/react-native-email-link#readme",
   "bugs": {
-    "url": "https://github.com/includable/react-native-email-link/issues"
+    "url": "https://github.com/flexible-agency/react-native-email-link/issues"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-native": ">=0.40.0"
   },
   "devDependencies": {
-    "prettier": "^3.3.2",
-    "semantic-release": "^23.1.1"
+    "prettier": "^2.2.1"
+  },
+  "codegenConfig": {
+    "name": "EmailSpec",
+    "type": "modules",
+    "jsSrcsDir": "src",
+    "android": {
+      "javaPackageName": "agency.flexible.react.modules.email"
+    }
   }
 }

@@ -316,11 +316,11 @@
     bottleneck "^2.15.3"
 
 "@octokit/request-error@^6.0.0", "@octokit/request-error@^6.0.1":
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/@octokit/request-error/-/request-error-6.1.0.tgz#8b69a5c6db3674369a84722ce3d06b58f1d71584"
-  integrity sha512-xcLJv4IgfWIOEEVZwfhUN3yHNWJL0AMw1J1Ba8BofM9RdDTbapg6MO4zNxlPS4XXX9aAIsbDRa47K57EhgeVAw==
+  version "6.1.7"
+  resolved "https://registry.yarnpkg.com/@octokit/request-error/-/request-error-6.1.7.tgz#44fc598f5cdf4593e0e58b5155fe2e77230ff6da"
+  integrity sha512-69NIppAwaauwZv6aOzb+VVLwt+0havz9GT5YplkeJv7fG7a40qpLt/yZKyiDxAhgz0EtgNdNcb96Z0u+Zyuy2g==
   dependencies:
-    "@octokit/types" "^13.0.0"
+    "@octokit/types" "^13.6.2"
 
 "@octokit/request-error@^6.1.7":
   version "6.1.7"
